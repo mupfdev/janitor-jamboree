@@ -11,8 +11,7 @@
 #include <SDL_getenv.h>
 #include <SDL/SDL.h>
 
-int8_t screenInit(
-    SDL_Surface *surface,
+SDL_Surface *screenInit(
     uint16_t width, uint16_t height, uint8_t fullscreen,
     const char *title
 );

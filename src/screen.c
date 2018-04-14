@@ -6,31 +6,32 @@
 
 #include "screen.h"
 
-int8_t screenInit(
-    SDL_Surface *surface,
+SDL_Surface *screenInit(
     uint16_t width, uint16_t height, uint8_t fullscreen,
     const char *title)
 {
+    SDL_Surface *screen;
+
     if (-1 == SDL_Init(SDL_INIT_VIDEO))
     {
         fprintf(stderr, "Couldn't initialise SDL: %s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
     uint32_t flags = SDL_SWSURFACE;
     if (1 == fullscreen)
         flags = SDL_SWSURFACE | SDL_FULLSCREEN;
 
-    surface = SDL_SetVideoMode(width, height, 16, flags);
-    if (NULL == surface)
+    screen = SDL_SetVideoMode(width, height, 16, flags);
+    if (NULL == screen)
     {
         fprintf(stderr, "Couldn't set video mode: %s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
     SDL_WM_SetCaption(title, NULL);
 
-    return 0;
+    return screen;
 }
 
 void screenTerminate()

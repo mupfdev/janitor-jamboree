@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include "src/config.h"
 #include "src/input.h"
+#include "src/player.h"
 #include "src/screen.h"
 
 void quitGame();
