@@ -29,6 +29,8 @@ uint32_t inputPollEvent()
         {
             case SDL_QUIT:
                 return SDL_QUIT;
+            case SDL_KEYUP:
+                return KEYUP;
             case SDL_KEYDOWN:
                 keysym = event.key.keysym;
                 return keysym.sym;

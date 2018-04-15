@@ -7,15 +7,16 @@
  * See the file LICENSE.md for details */
 
 #include "main.h"
+
 int main()
 {
-    SDL_Surface *screen;
-    struct config_t config = configInit(config, NULL);
+    config_t config = configInit(config, NULL);
     uint16_t screenWidth = configGetInt(config, "video.width");
     uint16_t screenHeight = configGetInt(config, "video.height");
-    uint8_t screenFullscreen = configGetBool(config, "video.fullscreen");
+    uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
     const char *title = "Janitor Jamboree";
 
+    SDL_Surface *screen;
     screen = screenInit(screenWidth, screenHeight, screenFullscreen, title);
     if (NULL == screen)
         return EXIT_FAILURE;
@@ -23,7 +24,7 @@ int main()
     if (-1 == inputInit())
         return EXIT_FAILURE;
 
-    struct player *hero = playerInit();
+    player *hero = playerInit();
     uint8_t gameIsRunning = 1;
 
     while(gameIsRunning)
@@ -33,17 +34,28 @@ int main()
 
         switch(event)
         {
+            case KEYUP:
+                hero->frame = 0;
+                break;
             case SDLK_UP:
             case SDLK_w:
+                hero->direction = UP;
+                hero->frame++;
                 break;
             case SDLK_DOWN:
             case SDLK_s:
+                hero->direction = DOWN;
+                hero->frame++;
                 break;
             case SDLK_LEFT:
             case SDLK_a:
+                hero->direction = LEFT;
+                hero->frame++;
                 break;
             case SDLK_RIGHT:
             case SDLK_d:
+                hero->direction = RIGHT;
+                hero->frame++;
                 break;
             case SDL_QUIT:
             case SDLK_ESCAPE:

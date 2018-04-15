@@ -8,26 +8,29 @@
 #define PLAYER_h
 
 #define UP    0
-#define DOWN  1
-#define LEFT  2
-#define RIGHT 3
+#define DOWN  128
+#define LEFT  64
+#define RIGHT 192
 
 #include <stdint.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-struct player {
+struct playerInfo {
     const char *file;
     SDL_Surface *sprite;
     uint8_t direction;
+    uint16_t frame;
 };
 
-struct player *playerInit();
+typedef struct playerInfo player;
+
+player *playerInit();
 
 int8_t playerRender(
     SDL_Surface *screen,
     uint16_t screenWidth, uint16_t screenHeight,
-    struct player *player
+    player *player
 );
 
 #endif

@@ -6,13 +6,13 @@
 
 #include "player.h"
 
-struct player *playerInit()
+player *playerInit()
 {
-    static struct player *player;
-    player = malloc(sizeof(struct player));
+    static player *player;
+    player = malloc(sizeof(struct playerInfo));
 
     // Initialise default values.
-    player->file = "res/sprites/princess.png";
+    player->file = "res/sprites/soldier_altcolor.png";
     player->sprite = IMG_Load(player->file);
 
     if (NULL == player->sprite)
@@ -26,17 +26,22 @@ struct player *playerInit()
 int8_t playerRender(
     SDL_Surface *screen,
     uint16_t screenWidth, uint16_t screenHeight,
-    struct player *player)
+    player *player)
 {
-    int32_t xPos = (screenWidth / 2) - 32;
-    int32_t yPos = (screenHeight / 2) - 32;
+    int16_t xPos = (screenWidth / 2) - 32;
+    int16_t yPos = (screenHeight / 2) - 32;
 
-    SDL_BlitSurface(player->sprite, NULL, screen, NULL);
-    SDL_UpdateRect(screen, 0, 0, 0, 0);
+    if (player->frame >= 9)
+        player->frame = 0;
 
-    // Temporarily suppress error due unused variables.
-    int suppressWarning = xPos + yPos;
-    if (suppressWarning != 0) suppressWarning = 0;
+    SDL_Rect src = { player->frame * 64, player->direction, 64, 64 };
+    SDL_Rect dst = { xPos, yPos, 64, 64 };
+
+    SDL_BlitSurface(player->sprite, &src, screen, &dst);
+    SDL_UpdateRect(screen, xPos, yPos, 64, 64);
+
+    // Temporary. Please fix me later on.
+    SDL_FillRect(screen, NULL, 0x000000);
 
     return 0;
 }
