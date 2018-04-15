@@ -10,7 +10,13 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 
-int8_t inputInit();
-uint32_t inputPollEvent();
+struct inputData {
+    uint8_t *state;
+};
+
+typedef struct inputData input;
+
+input *inputInit();
+int8_t inputGetKeys(input *controls);
 
 #endif

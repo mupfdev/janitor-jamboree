@@ -6,36 +6,26 @@
 
 #include "input.h"
 
-int8_t inputInit()
+input *inputInit()
 {
+    static input *controls;
+    controls = malloc(sizeof(struct inputData));
+
     if (-1 == SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL))
     {
         fprintf(stderr, "Couldn't set keyboard repeat rate: %s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
-    return 0;
+    return controls;
 }
 
-uint32_t inputPollEvent()
+int8_t inputGetKeys(input *controls)
 {
     SDL_Event event;
+    SDL_PollEvent(&event);
 
-    while(SDL_PollEvent(&event))
-    {
-        SDL_keysym keysym;
+    controls->state = SDL_GetKeyState(NULL);
 
-        switch(event.type)
-        {
-            case SDL_QUIT:
-                return SDL_QUIT;
-            case SDL_KEYUP:
-                return SDL_KEYUP;
-            case SDL_KEYDOWN:
-                keysym = event.key.keysym;
-                return keysym.sym;
-        }
-    }
-
-    return SDLK_UNKNOWN;
+    return 0;
 }

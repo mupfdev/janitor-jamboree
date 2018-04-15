@@ -7,30 +7,31 @@
 #ifndef PLAYER_h
 #define PLAYER_h
 
-#define UP    0
-#define DOWN  128
-#define LEFT  64
-#define RIGHT 192
+#define DIRECTION_UP    0
+#define DIRECTION_DOWN  128
+#define DIRECTION_LEFT  64
+#define DIRECTION_RIGHT 192
 
 #include <stdint.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
-struct playerInfo {
+struct playerData {
     const char *file;
     SDL_Surface *sprite;
     uint8_t direction;
+    uint8_t isWalking;
     uint16_t frame;
 };
 
-typedef struct playerInfo player;
+typedef struct playerData player;
 
 player *playerInit();
 
 int8_t playerRender(
     SDL_Surface *screen,
     uint16_t screenWidth, uint16_t screenHeight,
-    player *player
+    player *plr
 );
 
 #endif

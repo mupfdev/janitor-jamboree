@@ -8,9 +8,16 @@
 
 #include "main.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    config_t config = configInit(config, NULL);
+    config_t config;
+    char *configFile = NULL; 
+
+    if (argc == 2)
+        configFile = argv[1];
+
+    config = configInit(config, configFile);
+
     uint16_t screenWidth = configGetInt(config, "video.width");
     uint16_t screenHeight = configGetInt(config, "video.height");
     uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
@@ -21,48 +28,46 @@ int main()
     if (NULL == screen)
         return EXIT_FAILURE;
 
-    if (-1 == inputInit())
+    input *controls = inputInit();
+    if (NULL == controls)
         return EXIT_FAILURE;
 
     player *hero = playerInit();
-    uint8_t gameIsRunning = 1;
+    if (NULL == hero)
+        return EXIT_FAILURE;
 
+    uint8_t gameIsRunning = 1;
     while(gameIsRunning)
     {
-        playerRender(screen, screenWidth, screenHeight, hero);
-        uint32_t event = inputPollEvent();
+        inputGetKeys(controls);
+        if (-1 == playerRender(screen, screenWidth, screenHeight, hero))
+            return EXIT_FAILURE;
 
-        switch(event)
+        hero->isWalking = 0;
+
+        if (controls->state[SDLK_w])
         {
-            case SDL_KEYUP:
-                hero->frame = 0;
-                break;
-            case SDLK_UP:
-            case SDLK_w:
-                hero->direction = UP;
-                hero->frame++;
-                break;
-            case SDLK_DOWN:
-            case SDLK_s:
-                hero->direction = DOWN;
-                hero->frame++;
-                break;
-            case SDLK_LEFT:
-            case SDLK_a:
-                hero->direction = LEFT;
-                hero->frame++;
-                break;
-            case SDLK_RIGHT:
-            case SDLK_d:
-                hero->direction = RIGHT;
-                hero->frame++;
-                break;
-            case SDL_QUIT:
-            case SDLK_ESCAPE:
-            case SDLK_q:
-                gameIsRunning = 0;
-                break;
+            hero->direction = DIRECTION_UP;
+            hero->isWalking = 1;
         }
+        if (controls->state[SDLK_s])
+        {
+            hero->direction = DIRECTION_DOWN;
+            hero->isWalking = 1;
+        }
+        if (controls->state[SDLK_a])
+        {
+            hero->direction = DIRECTION_LEFT;
+            hero->isWalking = 1;
+        }
+        if (controls->state[SDLK_d])
+        {
+            hero->direction = DIRECTION_RIGHT;
+            hero->isWalking = 1;
+        }
+
+        if (controls->state[SDLK_q])
+            gameIsRunning = 0;
     }
 
     atexit(quitGame);
