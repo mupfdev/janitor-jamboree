@@ -51,12 +51,13 @@ int main()
         }
     }
 
+    configTerminate(config);
     atexit(quitGame);
+
     return EXIT_SUCCESS;
 }
 
 void quitGame()
 {
     screenTerminate();
-    configTerminate(config);
 }
