@@ -58,4 +58,5 @@ int main()
 void quitGame()
 {
     screenTerminate();
+    configTerminate(config);
 }
