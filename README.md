@@ -29,7 +29,7 @@ LSHIFT: run
 The quite odd game title was generated using [The Video Game Name Generator](https://www.videogamena.me/).
 
 ## License
-This project is licensed under the "THE BEER-WARE LICENCE" - see the file [LICENCE.md](LICENCE.md) for details.
+This project is licensed under the "THE BEER-WARE LICENCE".  See the file [LICENCE.md](LICENCE.md) for details.
 
 All the used artwork is taken from the [Liberated Pixel Cup](http://lpc.opengameart.org/) and is dual licensed under [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) and [GPLv3](http://www.gnu.org/licenses/gpl-3.0.html).
 
