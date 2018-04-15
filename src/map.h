@@ -1,4 +1,4 @@
- /* map.h -*-c-*-
+/* map.h -*-c-*-
  * Game map handler.
  *
  * "THE BEER-WARE LICENCE" (Revision 42):
