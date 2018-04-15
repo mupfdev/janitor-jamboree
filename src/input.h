@@ -12,11 +12,12 @@
 
 struct inputData {
     uint8_t *state;
+    uint8_t quit;
 };
 
 typedef struct inputData input;
 
 input *inputInit();
-int8_t inputGetKeys(input *controls);
+void inputGetKeys(input *controls);
 
 #endif

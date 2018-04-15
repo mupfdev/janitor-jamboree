@@ -8,66 +8,47 @@
 
 #include "main.h"
 
-int main(int argc, char *argv[])
+int main()
 {
+    // Initialise configuration file.
     config_t config;
-    char *configFile = NULL; 
+    config = configInit(config, NULL);
 
-    if (argc == 2)
-        configFile = argv[1];
-
-    config = configInit(config, configFile);
-
+    // Initialise window.
     uint16_t screenWidth = configGetInt(config, "video.width");
     uint16_t screenHeight = configGetInt(config, "video.height");
     uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
-    const char *title = "Janitor Jamboree";
+    const char *title = configGetString(config, "game.title");
 
     SDL_Surface *screen;
     screen = screenInit(screenWidth, screenHeight, screenFullscreen, title);
     if (NULL == screen)
         return EXIT_FAILURE;
 
+    // Initialise input handler.
     input *controls = inputInit();
     if (NULL == controls)
         return EXIT_FAILURE;
 
+    // Initialise player entity.
     player *hero = playerInit();
     if (NULL == hero)
         return EXIT_FAILURE;
 
+    // Main game loop.
     uint8_t gameIsRunning = 1;
+    puts("LCTRL+q to quit.");
+
     while(gameIsRunning)
     {
         inputGetKeys(controls);
-        if (-1 == playerRender(screen, screenWidth, screenHeight, hero))
-            return EXIT_FAILURE;
-
-        hero->isWalking = 0;
-
-        if (controls->state[SDLK_w])
+        switch(playerUpdate(screen, controls, screenWidth, screenHeight, hero))
         {
-            hero->direction = DIRECTION_UP;
-            hero->isWalking = 1;
+            case -1:
+                return EXIT_FAILURE;
+            case -2:
+                gameIsRunning = 0;
         }
-        if (controls->state[SDLK_s])
-        {
-            hero->direction = DIRECTION_DOWN;
-            hero->isWalking = 1;
-        }
-        if (controls->state[SDLK_a])
-        {
-            hero->direction = DIRECTION_LEFT;
-            hero->isWalking = 1;
-        }
-        if (controls->state[SDLK_d])
-        {
-            hero->direction = DIRECTION_RIGHT;
-            hero->isWalking = 1;
-        }
-
-        if (controls->state[SDLK_q])
-            gameIsRunning = 0;
     }
 
     atexit(quitGame);

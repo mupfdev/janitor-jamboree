@@ -17,15 +17,18 @@ input *inputInit()
         return NULL;
     }
 
+    controls->quit = 0;
+
     return controls;
 }
 
-int8_t inputGetKeys(input *controls)
+void inputGetKeys(input *controls)
 {
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    controls->state = SDL_GetKeyState(NULL);
+    if (event.type == SDL_QUIT)
+        controls->quit = 1;
 
-    return 0;
+    controls->state = SDL_GetKeyState(NULL);
 }
