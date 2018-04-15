@@ -34,7 +34,7 @@ int main()
 
         switch(event)
         {
-            case KEYUP:
+            case SDL_KEYUP:
                 hero->frame = 0;
                 break;
             case SDLK_UP:
