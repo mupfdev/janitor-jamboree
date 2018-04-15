@@ -14,6 +14,16 @@ To compile _Janitor Jamboree_ simply enter:
 make
 ```
 
+## Controls
+```
+W:      move up
+S:      move down
+A:      move left
+D:      move right
+CTRL+q: quit
+LSHIFT: run
+```
+
 ## Title
 The quite odd game title was generated using [The Video Game Name Generator](https://www.videogamena.me/).
 
