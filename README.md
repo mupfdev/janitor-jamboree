@@ -22,7 +22,6 @@ S:      move down
 A:      move left
 D:      move right
 CTRL+q: quit
-LSHIFT: run
 ```
 
 ## Title
