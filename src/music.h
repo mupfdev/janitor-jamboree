@@ -12,4 +12,15 @@
 #include <SDL/SDL_mixer.h>
 #include "config.h"
 
+struct musicType {
+    char *filename;
+    const uint16_t samplingFrequency;
+    const uint8_t numChannels;
+    const uint16_t chunkSize;
+};
+
+typedef struct musicType music;
+
+music *initMusic();
+
 #endif
