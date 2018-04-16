@@ -32,8 +32,10 @@ player *playerInit()
 
 int8_t playerUpdate(
     SDL_Surface *screen,
-    uint8_t *keyState, uint8_t quit,
-    uint16_t screenWidth, uint16_t screenHeight,
+    uint8_t *keyState,
+    uint8_t quit,
+    uint16_t screenWidth,
+    uint16_t screenHeight,
     player *plr)
 {
     int16_t xPos = (screenWidth / 2) - 32;

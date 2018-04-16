@@ -21,7 +21,10 @@ int main()
     const char *title = configGetString(config, "general.title");
 
     SDL_Surface *screen;
-    screen = screenInit(screenWidth, screenHeight, screenFullscreen, title);
+    screen = screenInit(screenWidth,
+                        screenHeight,
+                        screenFullscreen,
+                        title);
     if (NULL == screen)
         return EXIT_FAILURE;
 
@@ -42,7 +45,12 @@ int main()
     while(gameIsRunning)
     {
         inputGetKeys(controls);
-        switch(playerUpdate(screen, controls->keyState, controls->quit, screenWidth, screenHeight, hero))
+        switch(playerUpdate(screen,
+                            controls->keyState,
+                            controls->quit,
+                            screenWidth,
+                            screenHeight,
+                            hero))
         {
             case -1:
                 return EXIT_FAILURE;

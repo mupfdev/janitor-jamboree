@@ -12,16 +12,19 @@
 #include <SDL/SDL.h>
 
 SDL_Surface *screenInit(
-    uint16_t width, uint16_t height, uint8_t fullscreen,
-    const char *title
-);
+    uint16_t width,
+    uint16_t height,
+    uint8_t fullscreen,
+    const char *title);
 
 void screenTerminate();
 
 int8_t screenDrawPixel(
     SDL_Surface *surface,
-    uint16_t x, uint16_t y,
-    uint8_t r, uint8_t g, uint8_t b
-);
+    uint16_t x,
+    uint16_t y,
+    uint8_t r,
+    uint8_t g,
+    uint8_t b);
 
 #endif
