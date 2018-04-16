@@ -9,15 +9,11 @@
 #ifndef MAIN_h
 #define MAIN_h
 
-#include <stdint.h>
-#include <stdlib.h>
 #include "src/config.h"
 #include "src/input.h"
 #include "src/map.h"
 #include "src/music.h"
 #include "src/player.h"
 #include "src/screen.h"
-
-void quitGame();
 
 #endif

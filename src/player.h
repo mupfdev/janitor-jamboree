@@ -15,9 +15,8 @@
 #include <stdint.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
-#include "input.h"
 
-struct playerData {
+struct playerType {
     const char *file;
     SDL_Surface *sprite;
     uint8_t direction;
@@ -27,14 +26,17 @@ struct playerData {
     uint8_t refreshRate;
 };
 
-typedef struct playerData player;
+typedef struct playerType player;
 
 player *playerInit();
 
 int8_t playerUpdate(
-    SDL_Surface *screen, input *controls,
+    SDL_Surface *screen,
+    uint8_t *keyState, uint8_t quit,
     uint16_t screenWidth, uint16_t screenHeight,
     player *plr
 );
+
+void playerTerminate(player *plr);
 
 #endif

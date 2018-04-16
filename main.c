@@ -18,7 +18,7 @@ int main()
     uint16_t screenWidth = configGetInt(config, "video.width");
     uint16_t screenHeight = configGetInt(config, "video.height");
     uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
-    const char *title = configGetString(config, "game.title");
+    const char *title = configGetString(config, "general.title");
 
     SDL_Surface *screen;
     screen = screenInit(screenWidth, screenHeight, screenFullscreen, title);
@@ -31,7 +31,7 @@ int main()
         return EXIT_FAILURE;
 
     // Initialise player entity.
-    player *hero = playerInit();
+    player *hero = playerInit(config);
     if (NULL == hero)
         return EXIT_FAILURE;
 
@@ -42,7 +42,7 @@ int main()
     while(gameIsRunning)
     {
         inputGetKeys(controls);
-        switch(playerUpdate(screen, controls, screenWidth, screenHeight, hero))
+        switch(playerUpdate(screen, controls->keyState, controls->quit, screenWidth, screenHeight, hero))
         {
             case -1:
                 return EXIT_FAILURE;
@@ -51,13 +51,10 @@ int main()
         }
     }
 
+    // Cleanup.
+    playerTerminate(hero);
+    screenTerminate();
     configTerminate(config);
-    atexit(quitGame);
 
     return EXIT_SUCCESS;
-}
-
-void quitGame()
-{
-    screenTerminate();
 }

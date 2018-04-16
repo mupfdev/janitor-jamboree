@@ -9,10 +9,10 @@
 player *playerInit()
 {
     static player *plr;
-    plr = malloc(sizeof(struct playerData));
+    plr = malloc(sizeof(struct playerType));
 
     // Initialise default values.
-    plr->file = "res/sprites/male_walkcycle.png";
+    plr->file = "res/sprites/princess.png";
     plr->sprite = IMG_Load(plr->file);
 
     if (NULL == plr->sprite)
@@ -31,45 +31,47 @@ player *playerInit()
 }
 
 int8_t playerUpdate(
-    SDL_Surface *screen, input *controls,
+    SDL_Surface *screen,
+    uint8_t *keyState, uint8_t quit,
     uint16_t screenWidth, uint16_t screenHeight,
     player *plr)
 {
     int16_t xPos = (screenWidth / 2) - 32;
     int16_t yPos = (screenHeight / 2) - 32;
 
-    if (controls->quit)
+    // Set-up controls.
+    if (quit)
         return -2;
 
-    if ((controls->state[SDLK_q]) && (controls->state[SDLK_LCTRL]))
+    if ((keyState[SDLK_q]) && (keyState[SDLK_LCTRL]))
         return -2;
 
-    if ((controls->state[SDLK_w]))
+    if (keyState[SDLK_w])
     {
         plr->direction = DIRECTION_UP;
         plr->inMotion = 1;
     }
 
-    if ((controls->state[SDLK_s]))
+    if (keyState[SDLK_s])
     {
         plr->direction = DIRECTION_DOWN;
         plr->inMotion = 1;
     }
 
-    if ((controls->state[SDLK_a]))
+    if (keyState[SDLK_a])
     {
         plr->direction = DIRECTION_LEFT;
         plr->inMotion = 1;
     }
 
-    if ((controls->state[SDLK_d]))
+    if (keyState[SDLK_d])
     {
         plr->direction = DIRECTION_RIGHT;
         plr->inMotion = 1;
     }
 
     // Test code to speed up the sprite animation.
-    if ((controls->state[SDLK_LSHIFT]))
+    if (keyState[SDLK_LSHIFT])
         plr->refreshRate = 30;
     else
         plr->refreshRate = 100;
@@ -102,4 +104,9 @@ int8_t playerUpdate(
     SDL_FillRect(screen, NULL, 0x000000);
 
     return 0;
+}
+
+void playerTerminate(player *plr)
+{
+    SDL_FreeSurface(plr->sprite);
 }

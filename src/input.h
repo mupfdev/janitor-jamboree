@@ -10,12 +10,12 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 
-struct inputData {
-    uint8_t *state;
+struct inputType {
+    uint8_t *keyState;
     uint8_t quit;
 };
 
-typedef struct inputData input;
+typedef struct inputType input;
 
 input *inputInit();
 void inputGetKeys(input *controls);

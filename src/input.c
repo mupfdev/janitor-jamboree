@@ -9,7 +9,7 @@
 input *inputInit()
 {
     static input *controls;
-    controls = malloc(sizeof(struct inputData));
+    controls = malloc(sizeof(struct inputType));
 
     if (-1 == SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL))
     {
@@ -30,5 +30,5 @@ void inputGetKeys(input *controls)
     if (event.type == SDL_QUIT)
         controls->quit = 1;
 
-    controls->state = SDL_GetKeyState(NULL);
+    controls->keyState = SDL_GetKeyState(NULL);
 }
