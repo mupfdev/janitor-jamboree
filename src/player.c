@@ -6,13 +6,33 @@
 
 #include "player.h"
 
+static void *frameUpdate(void *plr)
+{
+    player *playr = (player *)plr;
+
+    while(1)
+    {
+        if (playr->inMotion)
+        {
+            usleep(1000000 / playr->fps);
+            playr->frame++;
+        }
+        else
+            playr->frame = 0;
+
+        (9 <= playr->frame) && (playr->frame = 0);
+    }
+
+    return NULL;
+}
+
 player *playerInit()
 {
     static player *plr;
     plr = malloc(sizeof(struct playerType));
 
     // Initialise default values.
-    plr->file = "res/sprites/princess.png";
+    plr->file   = "res/sprites/princess.png";
     plr->sprite = IMG_Load(plr->file);
 
     if (NULL == plr->sprite)
@@ -22,28 +42,29 @@ player *playerInit()
     }
 
     plr->direction = DIRECTION_DOWN;
-    plr->inMotion = 0;
-    plr->frame = 0;
-    plr->refreshCounter = 1;
-    plr->refreshRate = 100; // The higher the value, the slower the animation.
+    plr->inMotion  = 0;
+    plr->fps       = 24;
+    plr->frame     = 0;
+
+    pthread_t thread;
+    pthread_create(&thread, NULL, frameUpdate, plr);
 
     return plr;
 }
 
 int8_t playerUpdate(
     SDL_Surface *screen,
-    uint8_t *keyState,
-    uint8_t quit,
+    uint8_t  *keyState,
+    uint8_t  quit,
     uint16_t screenWidth,
     uint16_t screenHeight,
-    player *plr)
+    player   *plr)
 {
     int16_t xPos = (screenWidth / 2) - 32;
     int16_t yPos = (screenHeight / 2) - 32;
 
     // Set-up controls.
-    if (quit)
-        return -2;
+    if (quit) return -2;
 
     if ((keyState[SDLK_q]) && (keyState[SDLK_LCTRL]))
         return -2;
@@ -72,26 +93,7 @@ int8_t playerUpdate(
         plr->inMotion = 1;
     }
 
-    // Test code to speed up the sprite animation.
-    if (keyState[SDLK_LSHIFT])
-        plr->refreshRate = 30;
-    else
-        plr->refreshRate = 100;
-
-    /* Slow down sprite animation,
-     * reset animation if no key is pressed,
-     * repeat animation. */
-    (plr->inMotion) ? (plr->refreshCounter++) : (plr->frame = 0);
-    plr->inMotion = 0;
-
-    if ((plr->refreshCounter % plr->refreshRate) == 0)
-        plr->frame++;
-
-    (plr->refreshCounter > plr->refreshRate) && (plr->refreshCounter = 1);  
-
-    (9 <= plr->frame) && (plr->frame = 0);
-
-    // Update sprite.
+    // Display updated sprite.
     SDL_Rect src = { plr->frame * 64, plr->direction, 64, 64 };
     SDL_Rect dst = { xPos, yPos, 64, 64 };
 
@@ -104,6 +106,9 @@ int8_t playerUpdate(
 
     // Temporary. Please fix me later on.
     SDL_FillRect(screen, NULL, 0x000000);
+
+    // Reset inMotion state (in case no key is pressed).
+    plr->inMotion = 0;
 
     return 0;
 }

@@ -11,9 +11,11 @@
 #include <stdint.h>
 
 config_t configInit(config_t config, char *filename);
+
 int configGetBool(config_t config, const char *name);
 int configGetInt(config_t config, const char *name);
 const char *configGetString(config_t config, const char *name);
+
 void configTerminate(config_t config);
 
 #endif

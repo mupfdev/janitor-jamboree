@@ -11,7 +11,10 @@ input *inputInit()
     static input *controls;
     controls = malloc(sizeof(struct inputType));
 
-    if (-1 == SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL))
+    if (-1 ==
+        SDL_EnableKeyRepeat(
+            SDL_DEFAULT_REPEAT_DELAY,
+            SDL_DEFAULT_REPEAT_INTERVAL))
     {
         fprintf(stderr, "Couldn't set keyboard repeat rate: %s\n", SDL_GetError());
         return NULL;

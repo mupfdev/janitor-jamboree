@@ -5,5 +5,3 @@
  * See the file LICENSE.md for details */
 
 #include "map.h"
-
-// TODO.

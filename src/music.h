@@ -13,9 +13,9 @@
 #include "config.h"
 
 struct musicType {
-    char *filename;
+    const char     *filename;
     const uint16_t samplingFrequency;
-    const uint8_t numChannels;
+    const uint8_t  numChannels;
     const uint16_t chunkSize;
 };
 

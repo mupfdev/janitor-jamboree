@@ -15,28 +15,27 @@ int main()
     config = configInit(config, NULL);
 
     // Initialise window.
-    uint16_t screenWidth = configGetInt(config, "video.width");
-    uint16_t screenHeight = configGetInt(config, "video.height");
+    uint16_t screenWidth      = configGetInt(config, "video.width");
+    uint16_t screenHeight     = configGetInt(config, "video.height");
     uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
+
     const char *title = configGetString(config, "general.title");
 
     SDL_Surface *screen;
-    screen = screenInit(screenWidth,
-                        screenHeight,
-                        screenFullscreen,
-                        title);
-    if (NULL == screen)
-        return EXIT_FAILURE;
+    screen = screenInit(
+        screenWidth,
+        screenHeight,
+        screenFullscreen,
+        title);
+    if (NULL == screen) return EXIT_FAILURE;
 
     // Initialise input handler.
     input *controls = inputInit();
-    if (NULL == controls)
-        return EXIT_FAILURE;
+    if (NULL == controls) return EXIT_FAILURE;
 
     // Initialise player entity.
     player *hero = playerInit(config);
-    if (NULL == hero)
-        return EXIT_FAILURE;
+    if (NULL == hero) return EXIT_FAILURE;
 
     // Main game loop.
     uint8_t gameIsRunning = 1;
@@ -45,17 +44,19 @@ int main()
     while(gameIsRunning)
     {
         inputGetKeys(controls);
-        switch(playerUpdate(screen,
-                            controls->keyState,
-                            controls->quit,
-                            screenWidth,
-                            screenHeight,
-                            hero))
+
+        int8_t plru = playerUpdate(
+            screen,
+            controls->keyState,
+            controls->quit,
+            screenWidth,
+            screenHeight,
+            hero);
+
+        switch(plru)
         {
-            case -1:
-                return EXIT_FAILURE;
-            case -2:
-                gameIsRunning = 0;
+            case -1: return EXIT_FAILURE;
+            case -2: gameIsRunning = 0;
         }
     }
 
