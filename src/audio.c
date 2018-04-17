@@ -96,6 +96,7 @@ int8_t musicPlay(music *tune)
  * @param tune
  * @param ms
  * @return 
+ * @ingroup Audio
  */
 int8_t musicFadeIn(music *tune, uint16_t ms)
 {
