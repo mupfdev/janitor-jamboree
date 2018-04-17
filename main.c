@@ -40,7 +40,12 @@ int main()
 
     // Initialise audio.
     mixer *mix = mixerInit();
-    if (NULL == mix) return EXIT_FAILURE;
+    music *tune = musicInit();
+    /* Note: The error handling isn't missing.  There is simply no need to quit
+     * the program if the music can't be played by some reason. */
+    if (NULL != mix)
+        if (configGetBool(config, "audio.enabled"))
+            musicFadeIn(tune, 5000);
 
     // Main game loop.
     uint8_t gameIsRunning = 1;
@@ -66,7 +71,11 @@ int main()
     }
 
     // Cleanup.
-    mixerTerminate();
+    if (configGetBool(config, "audio.enabled"))
+    {
+        musicTerminate(tune);
+        mixerTerminate();
+    }
     playerTerminate(hero);
     screenTerminate();
     configTerminate(config);

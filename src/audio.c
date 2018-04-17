@@ -53,29 +53,60 @@ mixer *mixerInit()
     return mix;
 }
 
-/*
-music *musicInit(char *filename)
+/**
+ * @brief 
+ * @return 
+ * @ingroup Audio
+ */
+music *musicInit()
 {
     static music *tune;
     tune = malloc(sizeof(struct musicType));
 
+    // Set default values.
+    tune->filename = "res/music/overworld theme.ogg";
+
+    tune->mus = Mix_LoadMUS(tune->filename);
+    if (NULL == tune->mus) {
+        fprintf(stderr, "%s\n", Mix_GetError());
+        return NULL;
+    }
+
     return tune;
 }
 
+/**
+ * @brief 
+ * @param tune
+ * @return 
+ * @ingroup Audio
+ */
 int8_t musicPlay(music *tune)
 {
+    if (-1 == Mix_PlayMusic(tune->mus, -1)) {
+        fprintf(stderr, "%s\n", Mix_GetError());
+        return -1;
+    }
+
     return 0;
 }
 
-int8_t musicPause(music *tune)
+/**
+ * @brief 
+ * @param tune
+ * @param ms
+ * @return 
+ */
+int8_t musicFadeIn(music *tune, uint16_t ms)
 {
+    if (-1 == Mix_FadeInMusic(tune->mus, -1, ms))
+    {
+        fprintf(stderr, "%s\n", Mix_GetError());
+        return -1;
+    }
+
     return 0;
 }
-
-int8_t musicStop(music *tune)
-{
-    return 0;
-}*/
 
 /**
  * @brief Terminate audio mixers.
@@ -87,8 +118,12 @@ void mixerTerminate()
     while(Mix_Init(0)) Mix_Quit();
 }
 
-/*void musicTerminate(music *tune)
+/**
+ * @brief 
+ * @param tune
+ * @ingroup Audio
+ */
+void musicTerminate(music *tune)
 {
-
+    Mix_FreeMusic(tune->mus);
 }
-*/

@@ -24,17 +24,17 @@ struct mixerType {
 };
 
 struct musicType {
-    char *filename;
+    char      *filename;
+    Mix_Music *mus;
 };
 
 typedef struct mixerType mixer;
 typedef struct musicType music;
 
 mixer *mixerInit();
-music *musicInit(char *filename);
+music *musicInit();
 int8_t musicPlay(music *tune);
-int8_t musicPause(music *tune);
-int8_t musicStop(music *tune);
+int8_t musicFadeIn(music *tune, uint16_t ms);
 
 void mixerTerminate();
 void musicTerminate(music *tune);
