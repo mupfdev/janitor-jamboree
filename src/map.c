@@ -1,7 +1,9 @@
-/* map.c -*-c-*-
- * Game map handler.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file map.c
+ * @ingroup   Map
+ * @defgroup  Map
+ * @brief     Game map handler
+ * @author    Michael Fitzmayer
+ * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ */
 
 #include "map.h"

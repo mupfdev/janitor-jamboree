@@ -1,11 +1,23 @@
-/* config.c -*-c-*-
- * Configuration handler.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file config.c
+ * @ingroup   Config
+ * @defgroup  Config
+ * @brief     Configuration file handler
+ * @author    Michael Fitzmayer
+ * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ */
 
 #include "config.h"
 
+/**
+ * @brief   Initialise a configuration file.
+ * @param   config The structure which needs to be initialised.
+ * @param   filename Path to the configuration file.
+ * @return  Initialised config_t structure.  Deallocating all memory associated
+ *          with the configuration on error, but does not attempt to deallocate
+ *          the config_t structure itself.
+ * @todo    Adjust function to return pointer instead of config_t structure.
+ * @ingroup Config
+ */
 config_t configInit(config_t config, char *filename)
 {
     config_init(&config);
@@ -22,7 +34,14 @@ config_t configInit(config_t config, char *filename)
     return config;
 }
 
-int configGetBool(config_t config, const char *name)
+/**
+ * @brief   Look up a boolean value specified by @e name. @e
+ * @param   config Initialised config_t structure.
+ * @param   name Name of the requested value.
+ * @return  value The requested boolean value, prints message on error.
+ * @ingroup Config
+ */
+int32_t configGetBool(config_t config, const char *name)
 {
     int value;
 
@@ -32,7 +51,14 @@ int configGetBool(config_t config, const char *name)
     return value;
 }
 
-int configGetInt(config_t config, const char *name)
+/**
+ * @brief   Look up a integer specified by @e name. @e
+ * @param   config Initialised config_t structure.
+ * @param   name Name of the requested integer.
+ * @return  value The requested integer, prints message on error.
+ * @ingroup Config
+ */
+int32_t configGetInt(config_t config, const char *name)
 {
     int value;
 
@@ -42,6 +68,13 @@ int configGetInt(config_t config, const char *name)
     return value;
 }
 
+/**
+ * @brief   Look up a string value specified by @e name. @e
+ * @param   config Initialised config_t structure.
+ * @param   name Name of the requested string.
+ * @return  value The requested string, prints message on error.
+ * @ingroup Config
+ */
 const char *configGetString(config_t config, const char *name)
 {
     const char *value;
@@ -52,6 +85,12 @@ const char *configGetString(config_t config, const char *name)
     return value;
 }
 
+/**
+ * @brief Terminate config_t structure.
+ * @param config The config_t structure whose memory is to be deallocated.
+ *        The structure itself is not deallocated.
+ * @ingroup Config
+ */
 void configTerminate(config_t config)
 {
     config_destroy(&config);

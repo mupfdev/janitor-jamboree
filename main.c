@@ -1,13 +1,14 @@
-/* main.c -*-c-*-
- * Janitor Jamboree
- * A constantly evolving project I work on to learn the art of game programming
- * and design patterns.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file main.c
+ * @author    Michael Fitzmayer
+ * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ */
 
 #include "main.h"
 
+/**
+ * @brief  main program
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on error
+ */
 int main()
 {
     // Initialise configuration file.
@@ -19,7 +20,7 @@ int main()
     uint16_t screenHeight     = configGetInt(config, "video.height");
     uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
 
-    const char *title = configGetString(config, "general.title");
+    const char *title = configGetString(config, "game.title");
 
     SDL_Surface *screen;
     screen = screenInit(
@@ -36,6 +37,10 @@ int main()
     // Initialise player entity.
     player *hero = playerInit(config);
     if (NULL == hero) return EXIT_FAILURE;
+
+    // Initialise audio.
+    mixer *mix = mixerInit();
+    if (NULL == mix) return EXIT_FAILURE;
 
     // Main game loop.
     uint8_t gameIsRunning = 1;
@@ -61,6 +66,7 @@ int main()
     }
 
     // Cleanup.
+    mixerTerminate();
     playerTerminate(hero);
     screenTerminate();
     configTerminate(config);

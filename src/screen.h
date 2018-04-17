@@ -1,8 +1,6 @@
-/* screen.c -*-c-*-
- * Screen/Window handler.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file screen.h
+ * @ingroup Screen
+ */
 
 #ifndef SCREEN_h
 #define SCREEN_h
@@ -17,8 +15,6 @@ SDL_Surface *screenInit(
     uint8_t  fullscreen,
     const char *title);
 
-void screenTerminate();
-
 int8_t screenDrawPixel(
     SDL_Surface *surface,
     uint16_t x,
@@ -26,5 +22,7 @@ int8_t screenDrawPixel(
     uint8_t  r,
     uint8_t  g,
     uint8_t  b);
+
+void screenTerminate();
 
 #endif

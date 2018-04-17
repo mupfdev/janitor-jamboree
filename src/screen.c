@@ -1,11 +1,22 @@
-/* screen.c -*-c-*-
- * Screen/Window handler.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file screen.c
+ * @ingroup   Screen
+ * @defgroup  Screen
+ * @brief     Screen/Window handler
+ * @author    Michael Fitzmayer
+ * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ */
 
 #include "screen.h"
 
+/**
+ * @brief 
+ * @param width
+ * @param height
+ * @param fullscreen
+ * @param title
+ * @return 
+ * @ingroup Screen
+ */
 SDL_Surface *screenInit(
     uint16_t width,
     uint16_t height,
@@ -36,11 +47,17 @@ SDL_Surface *screenInit(
     return screen;
 }
 
-void screenTerminate()
-{
-    SDL_Quit();
-}
-
+/**
+ * @brief 
+ * @param surface
+ * @param x
+ * @param y
+ * @param r
+ * @param g
+ * @param b
+ * @return 
+ * @ingroup Screen
+ */
 int8_t screenDrawPixel(
     SDL_Surface *surface,
     uint16_t x,
@@ -64,4 +81,13 @@ int8_t screenDrawPixel(
     *bufp = SDL_MapRGB(surface->format, r, g, b);
 
     return 0;
+}
+
+/**
+ * @brief 
+ * @ingroup Screen
+ */
+void screenTerminate()
+{
+    SDL_Quit();
 }

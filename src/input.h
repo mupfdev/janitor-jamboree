@@ -1,8 +1,6 @@
-/* input.h -*-c-*-
- * Input handler.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file input.h
+ * @ingroup Input
+ */
 
 #ifndef INPUT_h
 #define INPUT_h
@@ -10,6 +8,9 @@
 #include <stdlib.h>
 #include <SDL/SDL.h>
 
+/**
+ * @ingroup Audio
+ */
 struct inputType {
     uint8_t *keyState;
     uint8_t quit;

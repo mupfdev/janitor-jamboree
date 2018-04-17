@@ -1,7 +1,7 @@
 # Janitor Jamboree
 A constantly evolving project I work on to learn the art of game programming and design patterns.
 
-### Dependencies and how to compile
+## Dependencies and how to compile
 The program has been successfully compiled with following libraries:
 ```
 libconfig 1.7.2
@@ -15,7 +15,13 @@ To compile _Janitor Jamboree_ simply enter:
 make
 ```
 
+To generate the documentation using doxygen enter:
+```
+doxygen
+```
+
 ## Controls
+
 ```
 W:      move up
 S:      move down

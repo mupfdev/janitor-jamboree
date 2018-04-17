@@ -1,11 +1,18 @@
-/* input.c -*-c-*-
- * Input handler.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file input.c
+ * @ingroup   Input
+ * @defgroup  Input
+ * @brief     Input handler
+ * @author    Michael Fitzmayer
+ * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ */
 
 #include "input.h"
 
+/**
+ * @brief 
+ * @return 
+ * @ingroup Input
+ */
 input *inputInit()
 {
     static input *controls;
@@ -25,6 +32,11 @@ input *inputInit()
     return controls;
 }
 
+/**
+ * @brief 
+ * @param controls
+ * @ingroup Input
+ */
 void inputGetKeys(input *controls)
 {
     SDL_Event event;

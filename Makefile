@@ -4,7 +4,8 @@ PROJECT=janitor-jamboree
 LIBS=\
 	`pkg-config --libs libconfig`\
 	`sdl-config --libs`\
-	-lSDL_image
+	-lSDL_image\
+	-lSDL_mixer
 CFLAGS=\
 	-pedantic-errors\
 	-std=c99\

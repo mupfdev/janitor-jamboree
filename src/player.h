@@ -1,8 +1,6 @@
-/* player.h -*-c-*-
- * Everything related to the game's player entity.
- *
- * "THE BEER-WARE LICENCE" (Revision 42):
- * See the file LICENSE.md for details */
+/** @file player.h
+ * @ingroup Player
+ */
 
 #ifndef PLAYER_h
 #define PLAYER_h
@@ -18,14 +16,16 @@
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
 
+/** @ingroup Audio
+ */
 struct playerType {
     const char  *file;
     SDL_Surface *sprite;
-    uint8_t  direction;
-    uint8_t  inMotion;
-    uint8_t  fps;
-    uint8_t  fpsc;
-    uint16_t frame;
+    uint8_t   direction;
+    uint8_t   inMotion;
+    uint8_t   fps;
+    uint16_t  frame;
+    pthread_t frameUpdateThread;
 };
 
 typedef struct playerType player;
