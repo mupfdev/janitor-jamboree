@@ -9,7 +9,7 @@
 #include "audio.h"
 
 /**
- * @brief   Initialise an audio mixer.
+ * @brief   Initialise audio mixer.
  * @return  A pointer to a mixer, NULL on error.
  * @ingroup Audio
  */
@@ -54,8 +54,8 @@ mixer *mixerInit()
 }
 
 /**
- * @brief 
- * @return 
+ * @brief   Initialise music file.
+ * @return  A pointer to a music file, NULL on error.
  * @ingroup Audio
  */
 music *musicInit()
@@ -76,9 +76,9 @@ music *musicInit()
 }
 
 /**
- * @brief 
- * @param tune
- * @return 
+ * @brief   Play initialised music file.
+ * @param   tune An initialised music file.
+ * @return  0 on success, -1 on error.
  * @ingroup Audio
  */
 int8_t musicPlay(music *tune)
@@ -92,10 +92,10 @@ int8_t musicPlay(music *tune)
 }
 
 /**
- * @brief 
- * @param tune
- * @param ms
- * @return 
+ * @brief   Play initialised music file with additional fade-in effect.
+ * @param   tune An initialised music file.
+ * @param   ms Time to fade-in the music in milliseconds.
+ * @return  0 on success, -1 on error.
  * @ingroup Audio
  */
 int8_t musicFadeIn(music *tune, uint16_t ms)
@@ -121,8 +121,8 @@ void mixerTerminate(mixer *mix)
 }
 
 /**
- * @brief 
- * @param tune
+ * @brief   Terminate music file.
+ * @param   tune
  * @ingroup Audio
  */
 void musicTerminate(music *tune)

@@ -4,6 +4,7 @@
  * @brief     Input handler
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ * @todo      Document functions.
  */
 
 #include "input.h"

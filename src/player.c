@@ -4,6 +4,7 @@
  * @brief     Everything related to the game's player entity
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ * @todo      Document functions.
  */
 
 #include "player.h"
