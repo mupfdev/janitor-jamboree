@@ -36,7 +36,7 @@ music *musicInit();
 int8_t musicPlay(music *tune);
 int8_t musicFadeIn(music *tune, uint16_t ms);
 
-void mixerTerminate();
+void mixerTerminate(mixer *mix);
 void musicTerminate(music *tune);
 
 #endif

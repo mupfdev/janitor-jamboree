@@ -47,3 +47,12 @@ void inputGetKeys(input *controls)
 
     controls->keyState = SDL_GetKeyState(NULL);
 }
+
+/**
+ * @brief 
+ * @param controls
+ */
+void inputTerminate(input *controls)
+{
+    free(controls);
+}

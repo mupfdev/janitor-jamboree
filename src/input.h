@@ -20,5 +20,6 @@ typedef struct inputType input;
 
 input *inputInit();
 void inputGetKeys(input *controls);
+void inputTerminate(input *controls);
 
 #endif

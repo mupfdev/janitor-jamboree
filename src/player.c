@@ -44,7 +44,7 @@ player *playerInit()
     plr = malloc(sizeof(struct playerType));
 
     // Set default values.
-    plr->file   = "res/sprites/male_walkcycle.png";
+    plr->file   = "res/sprites/male.png";
     plr->sprite = IMG_Load(plr->file);
 
     if (NULL == plr->sprite)
@@ -142,6 +142,7 @@ int8_t playerUpdate(
  */
 void playerTerminate(player *plr)
 {
+    free(plr);
     SDL_FreeSurface(plr->sprite);
     pthread_cancel(plr->frameUpdateThread);
 }

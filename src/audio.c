@@ -113,8 +113,9 @@ int8_t musicFadeIn(music *tune, uint16_t ms)
  * @brief Terminate audio mixers.
  * @ingroup Audio
  */
-void mixerTerminate()
+void mixerTerminate(mixer *mix)
 {
+    free(mix);
     Mix_CloseAudio();
     while(Mix_Init(0)) Mix_Quit();
 }
@@ -126,5 +127,6 @@ void mixerTerminate()
  */
 void musicTerminate(music *tune)
 {
+    free(tune);
     Mix_FreeMusic(tune->mus);
 }

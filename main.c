@@ -6,7 +6,7 @@
 #include "main.h"
 
 /**
- * @brief  main program
+ * @brief  Main program.
  * @return EXIT_SUCCESS on success, EXIT_FAILURE on error
  */
 int main()
@@ -74,9 +74,10 @@ int main()
     if (configGetBool(config, "audio.enabled"))
     {
         musicTerminate(tune);
-        mixerTerminate();
+        mixerTerminate(mix);
     }
     playerTerminate(hero);
+    inputTerminate(controls);
     screenTerminate();
     configTerminate(config);
 

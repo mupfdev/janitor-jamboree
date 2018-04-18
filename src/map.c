@@ -7,3 +7,24 @@
  */
 
 #include "map.h"
+
+/**
+ * @brief 
+ * @return 
+ */
+map *mapInit()
+{
+    static map *world;
+    world = malloc(sizeof(struct mapType));
+
+    return world;
+}
+
+/**
+ * @brief 
+ * @param world
+ */
+void mapTerminate(map *world)
+{
+    free(world);
+}
