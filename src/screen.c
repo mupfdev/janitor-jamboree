@@ -9,12 +9,12 @@
 #include "screen.h"
 
 /**
- * @brief 
- * @param width
- * @param height
- * @param fullscreen
- * @param title
- * @return 
+ * @brief Initialise screen/window.
+ * @param width Total number of pixels along the screen's width.
+ * @param height Total number of pixels along the screen's height.
+ * @param fullscreen Boolean value to set the screen's fullscreen state.
+ * @param title The window title shown at the top of the window.
+ * @return SDL_Surface structure on success, NULL on error.
  * @ingroup Screen
  */
 SDL_Surface *screenInit(
@@ -48,14 +48,14 @@ SDL_Surface *screenInit(
 }
 
 /**
- * @brief 
- * @param surface
- * @param x
- * @param y
- * @param r
- * @param g
- * @param b
- * @return 
+ * @brief   Draw single pixel.
+ * @param   surface The surface to draw on.
+ * @param   x X-coordinate.
+ * @param   y Y-coordinate.
+ * @param   r Red-value.
+ * @param   g Green-value.
+ * @param   b Blue-value.
+ * @return  0 on success, -1 on error.
  * @ingroup Screen
  */
 int8_t screenDrawPixel(
@@ -84,7 +84,7 @@ int8_t screenDrawPixel(
 }
 
 /**
- * @brief 
+ * @brief Terminate screen/window.
  * @ingroup Screen
  */
 void screenTerminate()
