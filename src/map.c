@@ -9,8 +9,9 @@
 #include "map.h"
 
 /**
- * @brief 
- * @return 
+ * @brief  Initialise map.
+ * @return Initialised map on success, NULL on error.
+ *         See @ref struct mapType.
  */
 map *mapInit()
 {
@@ -21,8 +22,8 @@ map *mapInit()
 }
 
 /**
- * @brief 
- * @param world
+ * @brief Terminate map.
+ * @param world The map structure.  See @ref struct mapType.
  */
 void mapTerminate(map *world)
 {

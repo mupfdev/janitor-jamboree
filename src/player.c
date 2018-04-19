@@ -4,14 +4,14 @@
  * @brief     Everything related to the game's player entity
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
- * @todo      Document functions.
  */
 
 #include "player.h"
 
 /**
- * @brief 
- * @param plr
+ * @brief   Function called in a separate thread to update the sprite frame as
+ *          long @c plr->inMotion @c is set to 1.  See @ref struct playerType.
+ * @param   plr The player structure.  See @ref struct playerType.
  * @ingroup Player
  */
 static void *frameUpdate(void *plr)
@@ -35,8 +35,8 @@ static void *frameUpdate(void *plr)
 }
 
 /**
- * @brief 
- * @return 
+ * @brief   Initialise a player structure.  See @ref struct playerType.
+ * @return  A pointer to a player structure on success, NULL on error.
  * @ingroup Player
  */
 player *playerInit()
@@ -65,14 +65,18 @@ player *playerInit()
 }
 
 /**
- * @brief 
- * @param screen
- * @param keyState
- * @param quit
- * @param screenWidth
- * @param screenHeight
- * @param plr
- * @return 
+ * @brief              Update the player's current state and display it's
+ *                     sprite.  Usually called within the game's main loop.
+ * @param screen       The SDL_Surface to use.
+ * @param keyState     pointer to keyState array.  See @ref struct inputType.
+ * @param quit         Boolean value to determine the program's quit state.
+ *                     See @ref struct inputType
+ * @param screenWidth  Total number of pixels along the screen's width.
+ *                     Used to align the player sprite at the screen's center.
+ * @param screenHeight Total number of pixels along the screen's height
+ *                     Used to align the player sprite at the screen's center.
+ * @param plr          The player struct.  See @ref struct playerType.
+ * @return             0 on success, -1 on error, -2 on quit.
  * @ingroup Player
  */
 int8_t playerUpdate(
@@ -137,8 +141,8 @@ int8_t playerUpdate(
 }
 
 /**
- * @brief 
- * @param plr
+ * @brief   Terminate player.
+ * @param   plr The player structure.  See @ref struct playerType.
  * @ingroup Player
  */
 void playerTerminate(player *plr)

@@ -9,7 +9,7 @@
 #include <SDL/SDL.h>
 
 /**
- * @ingroup Audio
+ * @ingroup Input
  */
 struct inputType {
     uint8_t *keyState;

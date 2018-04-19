@@ -4,14 +4,13 @@
  * @brief     Input handler
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
- * @todo      Document functions.
  */
 
 #include "input.h"
 
 /**
- * @brief 
- * @return 
+ * @brief   Initialise input structure.  See @ref struct inputType.
+ * @return  A pointer to an input structure on success, NULL on error.
  * @ingroup Input
  */
 input *inputInit()
@@ -34,8 +33,8 @@ input *inputInit()
 }
 
 /**
- * @brief 
- * @param controls
+ * @brief   Get current key state.
+ * @param   controls The input structure.  See @ref struct inputType.
  * @ingroup Input
  */
 void inputGetKeys(input *controls)
@@ -50,8 +49,8 @@ void inputGetKeys(input *controls)
 }
 
 /**
- * @brief 
- * @param controls
+ * @brief Terminate input structure.
+ * @param controls The input structure.  See @ref struct inputType.
  */
 void inputTerminate(input *controls)
 {

@@ -9,7 +9,7 @@
 #include "audio.h"
 
 /**
- * @brief   Initialise audio mixer.
+ * @brief   Initialise audio mixer.  See @ref struct mixerType.
  * @return  A pointer to a mixer, NULL on error.
  * @ingroup Audio
  */
@@ -54,8 +54,8 @@ mixer *mixerInit()
 }
 
 /**
- * @brief   Initialise music file.
- * @return  A pointer to a music file, NULL on error.
+ * @brief   Initialise music structure.  See @ref struct musicType. 
+ * @return  A pointer to a music structure, NULL on error.
  * @ingroup Audio
  */
 music *musicInit()
@@ -76,8 +76,8 @@ music *musicInit()
 }
 
 /**
- * @brief   Play initialised music file.
- * @param   tune An initialised music file.
+ * @brief   Play initialised music structure.
+ * @param   tune An initialised music structure.  See @ref struct musicType.
  * @return  0 on success, -1 on error.
  * @ingroup Audio
  */
@@ -92,8 +92,9 @@ int8_t musicPlay(music *tune)
 }
 
 /**
- * @brief   Play initialised music file with additional fade-in effect.
- * @param   tune An initialised music file.
+ * @brief   Play initialised music structure with additional fade-in effect.
+ *          See @ref struct muscType.
+ * @param   tune An initialised music file.  See @ref struct musicType. 
  * @param   ms Time to fade-in the music in milliseconds.
  * @return  0 on success, -1 on error.
  * @ingroup Audio
@@ -110,7 +111,8 @@ int8_t musicFadeIn(music *tune, uint16_t ms)
 }
 
 /**
- * @brief Terminate audio mixers.
+ * @brief   Terminate audio mixers.
+ * @param   mix The mixer structure.  See @ref struct mixerType.
  * @ingroup Audio
  */
 void mixerTerminate(mixer *mix)
@@ -122,7 +124,7 @@ void mixerTerminate(mixer *mix)
 
 /**
  * @brief   Terminate music file.
- * @param   tune
+ * @param   tune The music structure.  See @ref struct musicType.
  * @ingroup Audio
  */
 void musicTerminate(music *tune)
