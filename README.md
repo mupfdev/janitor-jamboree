@@ -8,9 +8,9 @@ libconfig 1.7.2
 sdl 1.2.15
 sdl_image 1.2.12
 sdl_mixer 1.2.12
-[tmx](https://github.com/baylej/tmx/)
-    libxml2
-    zlib
+tmx
+    libxml2 2.9.8
+    zlib 1.2.11
 ```
 
 To compile _Janitor Jamboree_ simply enter:
