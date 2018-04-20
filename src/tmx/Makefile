@@ -3,7 +3,7 @@
 PROJECT=janitor-jamboree
 
 all:
-	make -C ../
+	make -C ../../
 
 clean:
-	rm *.o tmx/*.o ../$(PROJECT)
+	rm *.o ../*.o ../../$(PROJECT)
