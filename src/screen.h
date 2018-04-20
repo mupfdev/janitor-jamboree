@@ -23,6 +23,6 @@ int8_t screenDrawPixel(
     uint8_t  g,
     uint8_t  b);
 
-void screenTerminate();
+void screenTerminate(SDL_Surface *screen);
 
 #endif

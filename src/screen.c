@@ -87,7 +87,8 @@ int8_t screenDrawPixel(
  * @brief Terminate screen/window.
  * @ingroup Screen
  */
-void screenTerminate()
+void screenTerminate(SDL_Surface *screen)
 {
+    SDL_FreeSurface(screen);
     SDL_Quit();
 }

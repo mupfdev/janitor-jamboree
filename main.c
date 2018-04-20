@@ -52,7 +52,7 @@ int main()
     mixerTerminate(mix);
     playerTerminate(hero);
     inputTerminate(controls);
-    screenTerminate();
+    screenTerminate(screen);
     configTerminate(config);
 
     return EXIT_SUCCESS;

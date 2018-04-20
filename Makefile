@@ -5,17 +5,21 @@ LIBS=\
 	`pkg-config --libs libconfig`\
 	`sdl-config --libs`\
 	-lSDL_image\
-	-lSDL_mixer
+	-lSDL_mixer\
+	`xml2-config --libs`
 CFLAGS=\
 	-pedantic-errors\
 	-std=c99\
+	-DWANT_ZLIB\
+	-Isrc/tmx\
+	-I/usr/include/libxml2\
 	-Wall\
 	-Werror\
 	-Wextra\
 	`pkg-config --cflags libconfig`\
-	`sdl-config --cflags`
-
-SRCS=$(wildcard src/*.c)
+	`sdl-config --cflags`\
+	`xml2-config --cflags`
+SRCS=$(wildcard src/*.c) $(wildcard src/tmx/*.c)
 OBJS=$(patsubst %.c, %.o, $(SRCS))
 
 all: $(OBJS)

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" tiledversion="1.1.4" orientation="orthogonal" renderorder="right-down" width="50" height="50" tilewidth="32" tileheight="32" infinite="0" nextobjectid="1">
+ <tileset firstgid="1" source="../tilesets/LPC Tile Atlas Terrain.tsx"/>
+ <layer name="Terrain Lower" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztlkEOgzAMBOmf+rPC/6tIRaqimADxmni1I+XAJd5xHGBZhBBCCC7eL3ut1fOsWHktpxnp5W6t2ciS0yJTr4/YM2+/ldkh8zkUGDwyZ/+HwaEgj7mQh71PdF88a1v/lMisiH8/1DeotecW4FPX9sx/drXm4gkPq/ejriM5kH2o63wOnu/gedeu1vG+pyP7ZfC4ms+r7gi9+W3V8b6bHh5n9kfNQ13Tm17u1bE26kx6ddBzgCZynrOC7FE0LC6o98gTRLxTomByKbB47DB6ZPZh8SiweAgRwRf+7FM3
+  </data>
+ </layer>
+ <layer name="Terrain Middle" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt1dENQEAQhOEtgU5QCSpBKSq297CJCC8Xsib5v2TeZ+LOmQEAAAAAAAC46rILfGD0TJ45u0il6D94Vk9velvKhugfaT17ZqkKiz1vaLJKVTrvUDxTd8qWLbvEC+KbKP+3rtTu+h+pv8/qbzEAAACg4AAIyA2M
+  </data>
+ </layer>
+ <layer name="Terrain Upper" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJztWUtywjAMlYc7EE5Csmh7ge5JTwLcoXvSk5CejOmyeIKw4sSOv7GBeOYtAhlbT9KTlOQAAIcFT4U2AxteASH8/JsBjzEcWXobFrw2lNowzM3iioagZv1ritRcdRx+wHyN7bFPrGWZw/pqTyGhhv51aBt8fTDG4S+hT13sbx6cA8cR+usRORQw1PQ2536rsA1jQfUcPRaB/YSxiJlH7QwxwljsZzhLB9951oVHjjM05/GxkniQ3M3R5lDxyAnnwDwa6OZInCU3M3IpQPSNk+fZ2yveV3BfO2a331T+FqCeteXedyL/2XLC2ZFjw7r9QvRStB9t3cL4Wit+33nkR3XjMZWrrYX9OxB+Qp99EXvH+NHfqC2m7wZ8NYf5TueLSnOOynZcrj0e97fViLEfWP++z5suUZ/fRKc+/ixBxNylfqB9U/q6QBcr1KNq+dRiGnOsH6Z8KsM6UbIOyEfWjAmPs+Y/9JW8pykfH33dZ3cQWnGKB/Eh+omDcuJ86LsXyqsAUaNczudn1tA/U7uPZW+4wJAP1nzUEOUwVmNsZ72YM1cJog9wTm8rwUXHQWkrU3PE3PadVUxzQNZRSP+ZxKQNGCP6TizkcynyiB2T2KB1M0cuNpqXe1luXExRwrDu+3BpE3KR+7LtjBH6+5nPfjwudeDYpATnY9zvPdBa3Ds152ljG5nHXKDPSQ3k/V1NhxKGs0Rqm1xBZ/IY39UWLHgm/AM+EUCF
+  </data>
+ </layer>
+</map>

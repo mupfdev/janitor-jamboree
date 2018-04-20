@@ -8,24 +8,19 @@
 
 #include "map.h"
 
-/**
- * @brief  Initialise map.
- * @return Initialised map on success, NULL on error.
- *         See @ref struct mapType.
- */
-map *mapInit()
+int8_t mapInit(const char *filename)
 {
-    static map *world;
-    world = malloc(sizeof(struct mapType));
+    tmx_map *map = tmx_load(filename);
 
-    return world;
+    if (NULL == map) {
+        tmx_perror("tmx_load");
+        return -1;
+    }
+
+    return 0;
 }
 
-/**
- * @brief Terminate map.
- * @param world The map structure.  See @ref struct mapType.
- */
-void mapTerminate(map *world)
+void mapTerminate(tmx_map *map)
 {
-    free(world);
+    tmx_map_free(map);
 }

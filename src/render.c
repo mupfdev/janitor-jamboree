@@ -1,4 +1,4 @@
-/** @file render.c
+/** @file renderer.c
  * @ingroup   Render
  * @defgroup  Render
  * @brief     The game's graphics renderer.
