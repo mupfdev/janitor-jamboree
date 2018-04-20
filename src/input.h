@@ -13,13 +13,12 @@
  */
 struct inputType {
     uint8_t *keyState;
-    uint8_t quit;
 };
 
 typedef struct inputType input;
 
 input *inputInit();
-void inputGetKeys(input *controls);
+int8_t inputGetKeys(input *controls);
 void inputTerminate(input *controls);
 
 #endif

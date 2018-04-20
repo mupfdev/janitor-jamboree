@@ -11,34 +11,25 @@
  */
 int main()
 {
-    // Initialise configuration file.
+    // Initialisation.
     config_t config;
     config = configInit(config, NULL);
 
-    // Initialise window.
-    uint16_t screenWidth      = configGetInt(config, "video.width");
-    uint16_t screenHeight     = configGetInt(config, "video.height");
-    uint8_t  screenFullscreen = configGetBool(config, "video.fullscreen");
-
-    const char *title = configGetString(config, "game.title");
+    uint16_t   width      = configGetInt(config,    "video.width");
+    uint16_t   height     = configGetInt(config,    "video.height");
+    uint8_t    fullscreen = configGetBool(config,   "video.fullscreen");
+    const char *title     = configGetString(config, "game.title");
 
     SDL_Surface *screen;
-    screen = screenInit(
-        screenWidth,
-        screenHeight,
-        screenFullscreen,
-        title);
+    screen = screenInit(width, height, fullscreen, title);
     if (NULL == screen) return EXIT_FAILURE;
 
-    // Initialise input handler.
     input *controls = inputInit();
     if (NULL == controls) return EXIT_FAILURE;
 
-    // Initialise player entity.
     player *hero = playerInit(config);
     if (NULL == hero) return EXIT_FAILURE;
 
-    // Initialise audio.
     mixer *mix = mixerInit();
     music *tune = musicInit();
     /* Note: The error handling isn't missing.  There is simply no need to quit
@@ -47,35 +38,18 @@ int main()
         if (configGetBool(config, "audio.enabled"))
             musicFadeIn(tune, 5000);
 
-    // Main game loop.
+    // Main loop.
     uint8_t gameIsRunning = 1;
-    puts("LCTRL+q to quit.");
-
     while(gameIsRunning)
     {
-        inputGetKeys(controls);
-
-        int8_t plru = playerUpdate(
-            screen,
-            controls->keyState,
-            controls->quit,
-            screenWidth,
-            screenHeight,
-            hero);
-
-        switch(plru)
-        {
-            case -1: return EXIT_FAILURE;
-            case -2: gameIsRunning = 0;
-        }
+        gameIsRunning = inputGetKeys(controls);
+        gameIsRunning = playerUpdate(hero, config, controls->keyState);
+        render(screen, hero);
     }
 
     // Cleanup.
-    if (configGetBool(config, "audio.enabled"))
-    {
-        musicTerminate(tune);
-        mixerTerminate(mix);
-    }
+    musicTerminate(tune);
+    mixerTerminate(mix);
     playerTerminate(hero);
     inputTerminate(controls);
     screenTerminate();

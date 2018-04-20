@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <SDL/SDL.h>
 #include <SDL/SDL_image.h>
+#include "config.h"
 
 /** @ingroup Audio
  */
@@ -26,20 +27,14 @@ struct playerType {
     uint8_t   fps;
     uint16_t  frame;
     pthread_t frameUpdateThread;
+    uint16_t  posX;
+    uint16_t  posY;
 };
 
 typedef struct playerType player;
 
 player *playerInit();
-
-int8_t playerUpdate(
-    SDL_Surface *screen,
-    uint8_t  *keyState,
-    uint8_t  quit,
-    uint16_t screenWidth,
-    uint16_t screenHeight,
-    player   *plr);
-
+int8_t playerUpdate(player *plr, config_t config, uint8_t *keyState);
 void playerTerminate(player *plr);
 
 #endif

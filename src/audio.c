@@ -1,7 +1,7 @@
 /** @file audio.c
  * @ingroup   Audio
  * @defgroup  Audio
- * @brief     In-game music and sound effect handler
+ * @brief     In-game music and sound effect handler.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */

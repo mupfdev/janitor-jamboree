@@ -1,7 +1,7 @@
 /** @file screen.c
  * @ingroup   Screen
  * @defgroup  Screen
- * @brief     Screen/Window handler
+ * @brief     Screen/Window handler.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */

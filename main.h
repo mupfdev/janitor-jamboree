@@ -9,6 +9,7 @@
 #include "src/input.h"
 #include "src/map.h"
 #include "src/player.h"
+#include "src/render.h"
 #include "src/screen.h"
 
 #endif

@@ -1,7 +1,7 @@
 /** @file config.c
  * @ingroup   Config
  * @defgroup  Config
- * @brief     Configuration file handler
+ * @brief     Configuration file handler.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */

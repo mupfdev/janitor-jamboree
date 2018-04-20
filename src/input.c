@@ -1,7 +1,7 @@
 /** @file input.c
  * @ingroup   Input
  * @defgroup  Input
- * @brief     Input handler
+ * @brief     Input handler.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -27,25 +27,25 @@ input *inputInit()
         return NULL;
     }
 
-    controls->quit = 0;
-
     return controls;
 }
 
 /**
- * @brief   Get current key state.
+ * @brief   Write current key state to input structure.
  * @param   controls The input structure.  See @ref struct inputType.
+ * @return  1 or 0 when SDL_QUIT has been triggered.
  * @ingroup Input
  */
-void inputGetKeys(input *controls)
+int8_t inputGetKeys(input *controls)
 {
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    if (event.type == SDL_QUIT)
-        controls->quit = 1;
+    if (event.type == SDL_QUIT) return 0;
 
     controls->keyState = SDL_GetKeyState(NULL);
+
+    return 1;
 }
 
 /**

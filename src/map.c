@@ -1,7 +1,7 @@
 /** @file map.c
  * @ingroup   Map
  * @defgroup  Map
- * @brief     Game map handler
+ * @brief     The game's map handler.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */

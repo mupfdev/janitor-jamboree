@@ -1,7 +1,7 @@
 /** @file player.c
  * @ingroup   Player
  * @defgroup  Player
- * @brief     Everything related to the game's player entity
+ * @brief     Everything related to the game's hero.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -67,77 +67,60 @@ player *playerInit()
 /**
  * @brief              Update the player's current state and display it's
  *                     sprite.  Usually called within the game's main loop.
- * @param screen       The SDL_Surface to use.
- * @param keyState     pointer to keyState array.  See @ref struct inputType.
- * @param quit         Boolean value to determine the program's quit state.
- *                     See @ref struct inputType
- * @param screenWidth  Total number of pixels along the screen's width.
- *                     Used to align the player sprite at the screen's center.
- * @param screenHeight Total number of pixels along the screen's height
- *                     Used to align the player sprite at the screen's center.
  * @param plr          The player struct.  See @ref struct playerType.
- * @return             0 on success, -1 on error, -2 on quit.
+ * @param config       Initialised config_t structure.
+ * @param keyState     Pointer to keyState array. See @ref struct inputType.
+ * @return             1 on success, 0 on quit.
  * @ingroup Player
  */
-int8_t playerUpdate(
-    SDL_Surface *screen,
-    uint8_t  *keyState,
-    uint8_t  quit,
-    uint16_t screenWidth,
-    uint16_t screenHeight,
-    player   *plr)
+int8_t playerUpdate(player *plr, config_t config, uint8_t *keyState)
 {
-    int16_t xPos = (screenWidth / 2) - 32;
-    int16_t yPos = (screenHeight / 2) - 32;
-
-    // Set-up controls.
-    if (quit) return -2;
-
-    if ((keyState[SDLK_q]) && (keyState[SDLK_LCTRL]))
-        return -2;
-
-    if (keyState[SDLK_w])
-    {
-        plr->direction = DIRECTION_UP;
-        plr->inMotion = 1;
-    }
-
-    if (keyState[SDLK_s])
-    {
-        plr->direction = DIRECTION_DOWN;
-        plr->inMotion = 1;
-    }
-
-    if (keyState[SDLK_a])
-    {
-        plr->direction = DIRECTION_LEFT;
-        plr->inMotion = 1;
-    }
-
-    if (keyState[SDLK_d])
-    {
-        plr->direction = DIRECTION_RIGHT;
-        plr->inMotion = 1;
-    }
-
-    // Display updated sprite.
-    SDL_Rect src = { plr->frame * 64, plr->direction, 64, 64 };
-    SDL_Rect dst = { xPos, yPos, 64, 64 };
-
-    if (-1 == SDL_BlitSurface(plr->sprite, &src, screen, &dst))
-    {
-        fprintf(stderr, "%s\n", SDL_GetError());
-        return -1;
-    }
-    SDL_UpdateRect(screen, xPos, yPos, 64, 64);
-
-    // Fill screen black. Temporary fix until the map is implemented.
-    SDL_FillRect(screen, NULL, 0x000000);
-
     // Reset inMotion state (in case no key is pressed).
     plr->inMotion = 0;
 
-    return 0;
+    uint16_t keyUp    = configGetInt(config, "controls.up");
+    uint16_t keyDown  = configGetInt(config, "controls.down");
+    uint16_t keyLeft  = configGetInt(config, "controls.left");
+    uint16_t keyRight = configGetInt(config, "controls.right");
+    uint16_t keyQuit  = configGetInt(config, "controls.quit");
+
+    if ((keyState[keyQuit]) && (keyState[SDLK_LCTRL]))
+        return 0;
+
+    if (keyState[keyUp])
+    {
+        plr->direction = DIRECTION_UP;
+        plr->inMotion = 1;
+        plr->posY--;
+    }
+
+    if (keyState[keyDown])
+    {
+        plr->direction = DIRECTION_DOWN;
+        plr->inMotion = 1;
+        plr->posY++;
+    }
+
+    if (keyState[keyLeft])
+    {
+        plr->direction = DIRECTION_LEFT;
+        plr->inMotion = 1;
+        plr->posX--;
+    }
+
+    if (keyState[keyRight])
+    {
+        plr->direction = DIRECTION_RIGHT;
+        plr->inMotion = 1;
+        plr->posX++;
+    }
+
+    if (plr->posX <= 0)     plr->posX = 0;
+    if (plr->posX >= 65535) plr->posX = 65535;
+    if (plr->posY <= 0)     plr->posY = 0;
+    if (plr->posY >= 65535) plr->posY = 65535;
+
+    return 1;
 }
 
 /**
