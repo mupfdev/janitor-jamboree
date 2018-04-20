@@ -5,12 +5,12 @@ A constantly evolving project I work on to learn the art of game programming and
 The program has been successfully compiled with following libraries:
 ```
 libconfig 1.7.2
-sdl 1.2.15
+libxml2   2.9.8
+sdl       1.2.15
 sdl_image 1.2.12
 sdl_mixer 1.2.12
+zlib      1.2.11
 tmx
-    libxml2 2.9.8
-    zlib 1.2.11
 ```
 
 To compile _Janitor Jamboree_ simply enter:
