@@ -10,7 +10,6 @@ sdl       1.2.15
 sdl_image 1.2.12
 sdl_mixer 1.2.12
 zlib      1.2.11
-tmx
 ```
 
 To compile _Janitor Jamboree_ simply enter:
