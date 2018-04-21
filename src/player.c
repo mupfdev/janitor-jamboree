@@ -146,6 +146,7 @@ uint8_t playerUpdate(Player *player, config_t config, const uint8_t *keyState)
 void playerTerminate(Player *player)
 {
     player->threadIsRunning = 0;
+    SDL_WaitThread(player->frameUpdateThread, NULL);
     free(player);
     SDL_FreeSurface(player->sprite);
 }

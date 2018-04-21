@@ -1,7 +1,7 @@
 /** @file renderer.h
  * @ingroup   Renderer
  * @defgroup  Renderer
- * @brief     The game's graphics renderer.
+ * @brief     The graphics renderer.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -16,6 +16,7 @@
  * @ingroup Renderer
  */
 struct RendererType {
+    SDL_Texture  *mapTex;
     SDL_Texture  *playerTex;
     SDL_Renderer *renderer;
 };

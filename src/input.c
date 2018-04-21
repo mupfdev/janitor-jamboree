@@ -18,12 +18,6 @@ Input *inputInit()
     static Input *input;
     input = malloc(sizeof(struct InputType));
 
-    /*if (-1 == SDL_SetRelativeMouseMode(SDL_TRUE))
-    {
-        fprintf(stderr, "%s\n", SDL_GetError());
-        return NULL;
-    }*/
-
     return input;
 }
 

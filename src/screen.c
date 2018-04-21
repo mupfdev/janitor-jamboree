@@ -33,8 +33,7 @@ Screen *screenInit(
     }
 
     uint32_t flags;
-    if (fullscreen)
-        flags = SDL_WINDOW_FULLSCREEN;
+    if (fullscreen) flags = SDL_WINDOW_FULLSCREEN;
 
     screen->window = SDL_CreateWindow(
         title,
