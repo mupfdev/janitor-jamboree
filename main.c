@@ -20,38 +20,40 @@ int main()
     uint8_t    fullscreen = configGetBool(config,   "video.fullscreen");
     const char *title     = configGetString(config, "game.title");
 
-    SDL_Surface *screen;
+    Screen *screen;
     screen = screenInit(width, height, fullscreen, title);
     if (NULL == screen) return EXIT_FAILURE;
+    atexit(SDL_Quit);
+
+    Renderer *renderer;
+    renderer = rendererInit(screen);
+    if (NULL == renderer) return EXIT_FAILURE;
 
     Input *input = inputInit();
     if (NULL == input) return EXIT_FAILURE;
 
-    Player *player = playerInit(config);
+    Player *player = playerInit();
     if (NULL == player) return EXIT_FAILURE;
 
-    Mixer *mixer = mixerInit();
-    Music *music = musicInit();
-    /* Note: The error handling isn't missing.  There is simply no need to quit
-     * the program if the music can't be played by some reason. */
-    if (NULL != mixer)
-        if (configGetBool(config, "audio.enabled"))
-            musicFadeIn(music, 5000);
+    Map *map = mapInit();
+    if (NULL == map) return EXIT_FAILURE;
 
-    // Main loop.
+    // Main loop.  
     uint8_t gameIsRunning = 1;
     while(gameIsRunning)
     {
         gameIsRunning = inputGetKeys(input);
-        gameIsRunning = playerUpdate(player, config, input->keyState);
-        render(screen, player);
+        if (1 == gameIsRunning)
+        {
+            gameIsRunning = playerUpdate(player, config, input->keyState);
+            render(screen, renderer, player);
+        }
     }
 
-    // Cleanup.
-    musicTerminate(music);
-    mixerTerminate(mixer);
+    mapTerminate(map);
     playerTerminate(player);
     inputTerminate(input);
+    rendererTerminate(renderer);
     screenTerminate(screen);
     configTerminate(config);
 

@@ -7,14 +7,14 @@
 
 #include <stdint.h>
 #include <string.h>
-#include <SDL/SDL.h>
-#include <SDL/SDL_mixer.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_mixer.h>
 #include "config.h"
 
 /**
  * @ingroup Audio
  */
-struct mixerType {
+struct MixerType {
     uint16_t audioFormat;
     int32_t  bitmask;
     uint16_t chunkSize;
@@ -23,13 +23,13 @@ struct mixerType {
     uint16_t samplingFrequency;
 };
 
-struct musicType {
+struct MusicType {
     char      *filename;
     Mix_Music *mus;
 };
 
-typedef struct mixerType Mixer;
-typedef struct musicType Music;
+typedef struct MixerType Mixer;
+typedef struct MusicType Music;
 
 Mixer *mixerInit();
 Music *musicInit();

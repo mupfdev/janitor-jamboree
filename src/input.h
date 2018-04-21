@@ -5,20 +5,19 @@
 #ifndef INPUT_h
 #define INPUT_h
 
-#include <stdlib.h>
-#include <SDL/SDL.h>
+#include <SDL2/SDL.h>
 
 /**
  * @ingroup Input
  */
-struct inputType {
-    uint8_t *keyState;
+struct InputType {
+    const uint8_t *keyState;
 };
 
-typedef struct inputType Input;
+typedef struct InputType Input;
 
 Input *inputInit();
-int8_t inputGetKeys(Input *input);
+uint8_t inputGetKeys(Input *input);
 void inputTerminate(Input *input);
 
 #endif

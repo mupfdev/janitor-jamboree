@@ -3,9 +3,9 @@
 PROJECT=janitor-jamboree
 LIBS=\
 	`pkg-config --libs libconfig`\
-	`sdl-config --libs`\
-	-lSDL_image\
-	-lSDL_mixer\
+	`sdl2-config --libs`\
+	-lSDL2_image\
+	-lSDL2_mixer\
 	`xml2-config --libs`
 CFLAGS=\
 	-pedantic-errors\
@@ -17,7 +17,7 @@ CFLAGS=\
 	-Werror\
 	-Wextra\
 	`pkg-config --cflags libconfig`\
-	`sdl-config --cflags`\
+	`sdl2-config --cflags`\
 	`xml2-config --cflags`
 SRCS=$(wildcard src/*.c) $(wildcard src/tmx/*.c)
 OBJS=$(patsubst %.c, %.o, $(SRCS))

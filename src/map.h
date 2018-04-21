@@ -6,10 +6,19 @@
 #ifndef MAP_h
 #define MAP_h
 
-#include <stdint.h>
 #include <tmx.h>
+#include <SDL2/SDL.h>
 
-int8_t mapInit(const char *filename);
-void mapTerminate(tmx_map *map);
+/** @ingroup Map
+ */
+struct MapType {
+    SDL_Surface *tileset;
+    tmx_map     *tmxMap;
+};
+
+typedef struct MapType Map;
+
+Map *mapInit();
+void mapTerminate(Map *map);
 
 #endif

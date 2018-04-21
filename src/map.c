@@ -8,19 +8,35 @@
 
 #include "map.h"
 
-int8_t mapInit(const char *filename)
+/**
+ * @brief   
+ * @return  
+ * @ingroup Map
+ */
+Map *mapInit()
 {
-    tmx_map *map = tmx_load(filename);
+    static Map *map;
+    map = malloc(sizeof(struct MapType));
 
-    if (NULL == map) {
-        tmx_perror("tmx_load");
-        return -1;
+    map->tmxMap = tmx_load("res/maps/outskirts.tmx");
+
+    if (NULL == map->tmxMap) {
+        fprintf(stderr, "%s\n", tmx_strerr());
+        return NULL;
     }
 
-    return 0;
+    //tmx_img_load_func = (void* (*)(const char*))IMG_Load;
+    //
+
+    return map;
 }
 
-void mapTerminate(tmx_map *map)
+/**
+ * @brief   
+ * @param   map
+ * @ingroup Map
+ */
+void mapTerminate(Map *map)
 {
-    tmx_map_free(map);
+    tmx_map_free(map->tmxMap);
 }

@@ -9,13 +9,10 @@
 #include "config.h"
 
 /**
- * @brief   Initialise a configuration file.
- * @param   config The structure which needs to be initialised.
- * @param   filename Path to the configuration file.
- * @return  Initialised config_t structure.  Deallocating all memory associated
- *          with the configuration on error, but does not attempt to deallocate
- *          the config_t structure itself.
- * @todo    Adjust function to return pointer instead of config_t structure.
+ * @brief   
+ * @param   config
+ * @param   filename
+ * @return  
  * @ingroup Config
  */
 config_t configInit(config_t config, char *filename)
@@ -35,10 +32,10 @@ config_t configInit(config_t config, char *filename)
 }
 
 /**
- * @brief   Look up a boolean value specified by @e name. @e
- * @param   config Initialised config_t structure.
- * @param   name Name of the requested value.
- * @return  value The requested boolean value, prints message on error.
+ * @brief   
+ * @param   config
+ * @param   name
+ * @return  
  * @ingroup Config
  */
 int32_t configGetBool(config_t config, const char *name)
@@ -52,10 +49,10 @@ int32_t configGetBool(config_t config, const char *name)
 }
 
 /**
- * @brief   Look up a integer specified by @e name. @e
- * @param   config Initialised config_t structure.
- * @param   name Name of the requested integer.
- * @return  value The requested integer, prints message on error.
+ * @brief   
+ * @param   config
+ * @param   name
+ * @return  
  * @ingroup Config
  */
 int32_t configGetInt(config_t config, const char *name)
@@ -69,10 +66,10 @@ int32_t configGetInt(config_t config, const char *name)
 }
 
 /**
- * @brief   Look up a string value specified by @e name. @e
- * @param   config Initialised config_t structure.
- * @param   name Name of the requested string.
- * @return  value The requested string, prints message on error.
+ * @brief   
+ * @param   config
+ * @param   name
+ * @return  
  * @ingroup Config
  */
 const char *configGetString(config_t config, const char *name)
@@ -86,9 +83,8 @@ const char *configGetString(config_t config, const char *name)
 }
 
 /**
- * @brief Terminate config_t structure.
- * @param config The config_t structure whose memory is to be deallocated.
- *        The structure itself is not deallocated.
+ * @brief   
+ * @param   config
  * @ingroup Config
  */
 void configTerminate(config_t config)

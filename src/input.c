@@ -9,48 +9,46 @@
 #include "input.h"
 
 /**
- * @brief   Initialise Input structure.  See @ref struct inputType.
- * @return  A pointer to an Input structure on success, NULL on error.
+ * @brief   
+ * @return  
  * @ingroup Input
  */
 Input *inputInit()
 {
     static Input *input;
-    input = malloc(sizeof(struct inputType));
+    input = malloc(sizeof(struct InputType));
 
-    if (-1 ==
-        SDL_EnableKeyRepeat(
-            SDL_DEFAULT_REPEAT_DELAY,
-            SDL_DEFAULT_REPEAT_INTERVAL))
+    /*if (-1 == SDL_SetRelativeMouseMode(SDL_TRUE))
     {
-        fprintf(stderr, "Couldn't set keyboard repeat rate: %s\n", SDL_GetError());
+        fprintf(stderr, "%s\n", SDL_GetError());
         return NULL;
-    }
+    }*/
 
     return input;
 }
 
 /**
- * @brief   Write current key state to Input structure.
- * @param   input The input structure.  See @ref struct inputType.
- * @return  1 or 0 when SDL_QUIT has been triggered.
+ * @brief   
+ * @param   input
+ * @return  
  * @ingroup Input
  */
-int8_t inputGetKeys(Input *input)
-{
+uint8_t inputGetKeys(Input *input)
+{   
     SDL_Event event;
     SDL_PollEvent(&event);
 
     if (event.type == SDL_QUIT) return 0;
 
-    input->keyState = SDL_GetKeyState(NULL);
+    input->keyState = SDL_GetKeyboardState(NULL);
 
     return 1;
 }
 
 /**
- * @brief Terminate Input structure.
- * @param input The Input structure.  See @ref struct inputType.
+ * @brief   
+ * @param   input
+ * @ingroup Input
  */
 void inputTerminate(Input *input)
 {

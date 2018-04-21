@@ -9,14 +9,14 @@
 #include "audio.h"
 
 /**
- * @brief   Initialise audio mixer.  See @ref struct mixerType.
- * @return  A pointer to a Mixer, NULL on error.
+ * @brief   
+ * @return  
  * @ingroup Audio
  */
 Mixer *mixerInit()
 {
     static Mixer *mixer;
-    mixer = malloc(sizeof(struct mixerType));
+    mixer = malloc(sizeof(struct MixerType));
 
     if (-1 == SDL_Init(SDL_INIT_AUDIO))
     {
@@ -54,14 +54,14 @@ Mixer *mixerInit()
 }
 
 /**
- * @brief   Initialise Music structure.  See @ref struct musicType. 
- * @return  A pointer to a Music structure, NULL on error.
+ * @brief   
+ * @return  
  * @ingroup Audio
  */
 Music *musicInit()
 {
     static Music *music;
-    music = malloc(sizeof(struct musicType));
+    music = malloc(sizeof(struct MusicType));
 
     // Set default values.
     music->filename = "res/music/overworld theme.ogg";
@@ -76,9 +76,9 @@ Music *musicInit()
 }
 
 /**
- * @brief   Play initialised Music structure.
- * @param   tune An initialised Music structure.  See @ref struct musicType.
- * @return  0 on success, -1 on error.
+ * @brief   
+ * @param   music
+ * @return  
  * @ingroup Audio
  */
 int8_t musicPlay(Music *music)
@@ -92,11 +92,10 @@ int8_t musicPlay(Music *music)
 }
 
 /**
- * @brief   Play initialised Music structure with additional fade-in effect.
- *          See @ref struct musicType.
- * @param   tune An initialised Music file.  See @ref struct musicType. 
- * @param   ms Time to fade-in the music in milliseconds.
- * @return  0 on success, -1 on error.
+ * @brief   
+ * @param   music
+ * @param   ms
+ * @return  
  * @ingroup Audio
  */
 int8_t musicFadeIn(Music *music, uint16_t ms)
@@ -111,8 +110,8 @@ int8_t musicFadeIn(Music *music, uint16_t ms)
 }
 
 /**
- * @brief   Terminate audio mixers.
- * @param   mix The Mixer structure.  See @ref struct mixerType.
+ * @brief   
+ * @param   mixer
  * @ingroup Audio
  */
 void mixerTerminate(Mixer *mixer)
@@ -123,8 +122,8 @@ void mixerTerminate(Mixer *mixer)
 }
 
 /**
- * @brief   Terminate music file.
- * @param   tune The Music structure.  See @ref struct musicType.
+ * @brief   
+ * @param   music
  * @ingroup Audio
  */
 void musicTerminate(Music *music)
