@@ -31,10 +31,10 @@ struct playerType {
     uint16_t  posY;
 };
 
-typedef struct playerType player;
+typedef struct playerType Player;
 
-player *playerInit();
-int8_t playerUpdate(player *plr, config_t config, uint8_t *keyState);
-void playerTerminate(player *plr);
+Player *playerInit();
+int8_t playerUpdate(Player *plr, config_t config, uint8_t *keyState);
+void playerTerminate(Player *player);
 
 #endif

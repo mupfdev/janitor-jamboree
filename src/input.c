@@ -9,14 +9,14 @@
 #include "input.h"
 
 /**
- * @brief   Initialise input structure.  See @ref struct inputType.
- * @return  A pointer to an input structure on success, NULL on error.
+ * @brief   Initialise Input structure.  See @ref struct inputType.
+ * @return  A pointer to an Input structure on success, NULL on error.
  * @ingroup Input
  */
-input *inputInit()
+Input *inputInit()
 {
-    static input *controls;
-    controls = malloc(sizeof(struct inputType));
+    static Input *input;
+    input = malloc(sizeof(struct inputType));
 
     if (-1 ==
         SDL_EnableKeyRepeat(
@@ -27,32 +27,32 @@ input *inputInit()
         return NULL;
     }
 
-    return controls;
+    return input;
 }
 
 /**
- * @brief   Write current key state to input structure.
- * @param   controls The input structure.  See @ref struct inputType.
+ * @brief   Write current key state to Input structure.
+ * @param   input The input structure.  See @ref struct inputType.
  * @return  1 or 0 when SDL_QUIT has been triggered.
  * @ingroup Input
  */
-int8_t inputGetKeys(input *controls)
+int8_t inputGetKeys(Input *input)
 {
     SDL_Event event;
     SDL_PollEvent(&event);
 
     if (event.type == SDL_QUIT) return 0;
 
-    controls->keyState = SDL_GetKeyState(NULL);
+    input->keyState = SDL_GetKeyState(NULL);
 
     return 1;
 }
 
 /**
- * @brief Terminate input structure.
- * @param controls The input structure.  See @ref struct inputType.
+ * @brief Terminate Input structure.
+ * @param input The Input structure.  See @ref struct inputType.
  */
-void inputTerminate(input *controls)
+void inputTerminate(Input *input)
 {
-    free(controls);
+    free(input);
 }

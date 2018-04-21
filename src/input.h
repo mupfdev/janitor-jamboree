@@ -15,10 +15,10 @@ struct inputType {
     uint8_t *keyState;
 };
 
-typedef struct inputType input;
+typedef struct inputType Input;
 
-input *inputInit();
-int8_t inputGetKeys(input *controls);
-void inputTerminate(input *controls);
+Input *inputInit();
+int8_t inputGetKeys(Input *input);
+void inputTerminate(Input *input);
 
 #endif

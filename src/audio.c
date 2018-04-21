@@ -10,13 +10,13 @@
 
 /**
  * @brief   Initialise audio mixer.  See @ref struct mixerType.
- * @return  A pointer to a mixer, NULL on error.
+ * @return  A pointer to a Mixer, NULL on error.
  * @ingroup Audio
  */
-mixer *mixerInit()
+Mixer *mixerInit()
 {
-    static mixer *mix;
-    mix = malloc(sizeof(struct mixerType));
+    static Mixer *mixer;
+    mixer = malloc(sizeof(struct mixerType));
 
     if (-1 == SDL_Init(SDL_INIT_AUDIO))
     {
@@ -25,15 +25,15 @@ mixer *mixerInit()
     }
 
     // Set default values.
-    mix->audioFormat       = MIX_DEFAULT_FORMAT;
-    mix->flags             = MIX_INIT_OGG;
-    mix->bitmask           = Mix_Init(mix->flags);
-    mix->chunkSize         = 4096;
-    mix->flags             = MIX_INIT_OGG;
-    mix->numChannels       = 2;
-    mix->samplingFrequency = 44100;
+    mixer->audioFormat       = MIX_DEFAULT_FORMAT;
+    mixer->flags             = MIX_INIT_OGG;
+    mixer->bitmask           = Mix_Init(mixer->flags);
+    mixer->chunkSize         = 4096;
+    mixer->flags             = MIX_INIT_OGG;
+    mixer->numChannels       = 2;
+    mixer->samplingFrequency = 44100;
 
-    if (mix->flags != (mix->bitmask & mix->flags))
+    if (mixer->flags != (mixer->bitmask & mixer->flags))
     {
         fprintf(stderr, "%s", Mix_GetError());
         return NULL;
@@ -41,49 +41,49 @@ mixer *mixerInit()
 
     if (-1 ==
         Mix_OpenAudio(
-            mix->samplingFrequency,
-            mix->audioFormat,
-            mix->numChannels,
-            mix->chunkSize))
+            mixer->samplingFrequency,
+            mixer->audioFormat,
+            mixer->numChannels,
+            mixer->chunkSize))
     {
         fprintf(stderr, "%s\n", Mix_GetError());
         return NULL;
     }
 
-    return mix;
+    return mixer;
 }
 
 /**
- * @brief   Initialise music structure.  See @ref struct musicType. 
- * @return  A pointer to a music structure, NULL on error.
+ * @brief   Initialise Music structure.  See @ref struct musicType. 
+ * @return  A pointer to a Music structure, NULL on error.
  * @ingroup Audio
  */
-music *musicInit()
+Music *musicInit()
 {
-    static music *tune;
-    tune = malloc(sizeof(struct musicType));
+    static Music *music;
+    music = malloc(sizeof(struct musicType));
 
     // Set default values.
-    tune->filename = "res/music/overworld theme.ogg";
+    music->filename = "res/music/overworld theme.ogg";
 
-    tune->mus = Mix_LoadMUS(tune->filename);
-    if (NULL == tune->mus) {
+    music->mus = Mix_LoadMUS(music->filename);
+    if (NULL == music->mus) {
         fprintf(stderr, "%s\n", Mix_GetError());
         return NULL;
     }
 
-    return tune;
+    return music;
 }
 
 /**
- * @brief   Play initialised music structure.
- * @param   tune An initialised music structure.  See @ref struct musicType.
+ * @brief   Play initialised Music structure.
+ * @param   tune An initialised Music structure.  See @ref struct musicType.
  * @return  0 on success, -1 on error.
  * @ingroup Audio
  */
-int8_t musicPlay(music *tune)
+int8_t musicPlay(Music *music)
 {
-    if (-1 == Mix_PlayMusic(tune->mus, -1)) {
+    if (-1 == Mix_PlayMusic(music->mus, -1)) {
         fprintf(stderr, "%s\n", Mix_GetError());
         return -1;
     }
@@ -92,16 +92,16 @@ int8_t musicPlay(music *tune)
 }
 
 /**
- * @brief   Play initialised music structure with additional fade-in effect.
- *          See @ref struct muscType.
- * @param   tune An initialised music file.  See @ref struct musicType. 
+ * @brief   Play initialised Music structure with additional fade-in effect.
+ *          See @ref struct musicType.
+ * @param   tune An initialised Music file.  See @ref struct musicType. 
  * @param   ms Time to fade-in the music in milliseconds.
  * @return  0 on success, -1 on error.
  * @ingroup Audio
  */
-int8_t musicFadeIn(music *tune, uint16_t ms)
+int8_t musicFadeIn(Music *music, uint16_t ms)
 {
-    if (-1 == Mix_FadeInMusic(tune->mus, -1, ms))
+    if (-1 == Mix_FadeInMusic(music->mus, -1, ms))
     {
         fprintf(stderr, "%s\n", Mix_GetError());
         return -1;
@@ -112,23 +112,23 @@ int8_t musicFadeIn(music *tune, uint16_t ms)
 
 /**
  * @brief   Terminate audio mixers.
- * @param   mix The mixer structure.  See @ref struct mixerType.
+ * @param   mix The Mixer structure.  See @ref struct mixerType.
  * @ingroup Audio
  */
-void mixerTerminate(mixer *mix)
+void mixerTerminate(Mixer *mixer)
 {
-    free(mix);
+    free(mixer);
     Mix_CloseAudio();
     while(Mix_Init(0)) Mix_Quit();
 }
 
 /**
  * @brief   Terminate music file.
- * @param   tune The music structure.  See @ref struct musicType.
+ * @param   tune The Music structure.  See @ref struct musicType.
  * @ingroup Audio
  */
-void musicTerminate(music *tune)
+void musicTerminate(Music *music)
 {
-    free(tune);
-    Mix_FreeMusic(tune->mus);
+    free(music);
+    Mix_FreeMusic(music->mus);
 }

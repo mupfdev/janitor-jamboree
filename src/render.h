@@ -14,6 +14,6 @@
 #include <SDL/SDL_image.h>
 #include "player.h"
 
-int8_t render(SDL_Surface *screen, player *plr);
+int8_t render(SDL_Surface *screen, Player *player);
 
 #endif

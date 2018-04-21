@@ -24,34 +24,34 @@ int main()
     screen = screenInit(width, height, fullscreen, title);
     if (NULL == screen) return EXIT_FAILURE;
 
-    input *controls = inputInit();
-    if (NULL == controls) return EXIT_FAILURE;
+    Input *input = inputInit();
+    if (NULL == input) return EXIT_FAILURE;
 
-    player *hero = playerInit(config);
-    if (NULL == hero) return EXIT_FAILURE;
+    Player *player = playerInit(config);
+    if (NULL == player) return EXIT_FAILURE;
 
-    mixer *mix = mixerInit();
-    music *tune = musicInit();
+    Mixer *mixer = mixerInit();
+    Music *music = musicInit();
     /* Note: The error handling isn't missing.  There is simply no need to quit
      * the program if the music can't be played by some reason. */
-    if (NULL != mix)
+    if (NULL != mixer)
         if (configGetBool(config, "audio.enabled"))
-            musicFadeIn(tune, 5000);
+            musicFadeIn(music, 5000);
 
     // Main loop.
     uint8_t gameIsRunning = 1;
     while(gameIsRunning)
     {
-        gameIsRunning = inputGetKeys(controls);
-        gameIsRunning = playerUpdate(hero, config, controls->keyState);
-        render(screen, hero);
+        gameIsRunning = inputGetKeys(input);
+        gameIsRunning = playerUpdate(player, config, input->keyState);
+        render(screen, player);
     }
 
     // Cleanup.
-    musicTerminate(tune);
-    mixerTerminate(mix);
-    playerTerminate(hero);
-    inputTerminate(controls);
+    musicTerminate(music);
+    mixerTerminate(mixer);
+    playerTerminate(player);
+    inputTerminate(input);
     screenTerminate(screen);
     configTerminate(config);
 

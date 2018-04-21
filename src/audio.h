@@ -28,15 +28,15 @@ struct musicType {
     Mix_Music *mus;
 };
 
-typedef struct mixerType mixer;
-typedef struct musicType music;
+typedef struct mixerType Mixer;
+typedef struct musicType Music;
 
-mixer *mixerInit();
-music *musicInit();
-int8_t musicPlay(music *tune);
-int8_t musicFadeIn(music *tune, uint16_t ms);
+Mixer *mixerInit();
+Music *musicInit();
+int8_t musicPlay(Music *music);
+int8_t musicFadeIn(Music *music, uint16_t ms);
 
-void mixerTerminate(mixer *mix);
-void musicTerminate(music *tune);
+void mixerTerminate(Mixer *mixer);
+void musicTerminate(Music *music);
 
 #endif
