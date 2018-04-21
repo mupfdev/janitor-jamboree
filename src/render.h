@@ -1,6 +1,6 @@
-/** @file renderer.h
- * @ingroup   Renderer
- * @defgroup  Renderer
+/** @file render.h
+ * @ingroup   Render
+ * @defgroup  Render
  * @brief     The game's graphics renderer.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)

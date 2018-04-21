@@ -13,9 +13,10 @@
  *          long @c player->inMotion @c is set to 1.
  *          See @ref struct playerType.
  * @param   player The Player structure.  See @ref struct playerType.
+ * @return  Always 0 because a return value is expected by SDL_CreateThread().
  * @ingroup Player
  */
-static void *frameUpdate(void *plr)
+static int32_t frameUpdate(void *plr)
 {
     Player *player = (Player *)plr;
 
@@ -32,7 +33,7 @@ static void *frameUpdate(void *plr)
         (9 <= player->frame) && (player->frame = 0);
     }
 
-    return NULL;
+    return 0;
 }
 
 /**
@@ -60,7 +61,7 @@ Player *playerInit()
     player->fps       = 24;
     player->frame     = 0;
 
-    pthread_create(&player->frameUpdateThread, NULL, frameUpdate, player);
+    player->frameUpdateThread = SDL_CreateThread(frameUpdate, player);
 
     return player;
 }
@@ -133,5 +134,5 @@ void playerTerminate(Player *player)
 {
     free(player);
     SDL_FreeSurface(player->sprite);
-    pthread_cancel(player->frameUpdateThread);
+    SDL_KillThread(player->frameUpdateThread);
 }
