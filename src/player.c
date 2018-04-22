@@ -44,12 +44,6 @@ Player *playerInit()
     static Player *player;
     player = malloc(sizeof(struct PlayerType));
 
-    // Set default values.
-    player->file   = "res/sprites/male.png";
-
-    if (-1 == playerReloadSprite(player))
-        return NULL;
-
     player->direction = DIRECTION_DOWN;
     player->inMotion  = 0;
     player->fps       = 24;
@@ -61,28 +55,9 @@ Player *playerInit()
     {
         fprintf(stderr, "%s\n", SDL_GetError());
         return NULL;
-    } else puts("Test");
-
-    return player;
-}
-
-/**
- * @brief   
- * @param   player
- * @return  
- * @ingroup Player
- */
-int8_t playerReloadSprite(Player *player)
-{
-    player->sprite = IMG_Load(player->file);
-
-    if (NULL == player->sprite)
-    {
-        fprintf(stderr, "Couldn't load image: %s\n", IMG_GetError());
-        return -1;
     }
 
-    return 0;
+    return player;
 }
 
 /**
@@ -134,6 +109,25 @@ uint8_t playerLoop(Player *player, const uint8_t *keyState)
     if (player->posY >= 65535) player->posY = 65535;
 
     return 1;
+}
+
+/**
+ * @brief   
+ * @param   player
+ * @return  
+ * @ingroup Player
+ */
+int8_t playerReloadSprite(Player *player)
+{
+    player->sprite = IMG_Load(player->filename);
+
+    if (NULL == player->sprite)
+    {
+        fprintf(stderr, "Couldn't load image: %s\n", IMG_GetError());
+        return -1;
+    }
+
+    return 0;
 }
 
 /**

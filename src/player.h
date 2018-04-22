@@ -19,7 +19,7 @@
 /** @ingroup Player
  */
 struct PlayerType {
-    const char  *file;
+    const char  *filename;
     SDL_Surface *sprite;
     uint8_t     direction;
     uint8_t     inMotion;
@@ -34,8 +34,8 @@ struct PlayerType {
 typedef struct PlayerType Player;
 
 Player *playerInit();
-int8_t playerReloadSprite(Player *player);
 uint8_t playerLoop(Player *player, const uint8_t *keyState);
+int8_t playerReloadSprite(Player *player);
 void playerTerminate(Player *player);
 
 #endif

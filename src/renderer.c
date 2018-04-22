@@ -20,6 +20,7 @@ Renderer *rendererInit(Screen *screen)
     renderer = malloc(sizeof(struct RendererType));
 
     renderer->renderer  = SDL_CreateRenderer(screen->window, -1, SDL_RENDERER_ACCELERATED);
+    renderer->mapTex    = NULL;
     renderer->playerTex = NULL;
 
     if (NULL == renderer->renderer)

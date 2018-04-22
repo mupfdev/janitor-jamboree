@@ -24,7 +24,6 @@ Mixer *mixerInit()
         return NULL;
     }
 
-    // Set default values.
     mixer->audioFormat       = MIX_DEFAULT_FORMAT;
     mixer->chunkSize         = 4096;
     mixer->numChannels       = 2;
@@ -54,15 +53,6 @@ Music *musicInit()
     static Music *music;
     music = malloc(sizeof(struct MusicType));
 
-    // Set default values.
-    music->filename = "res/music/overworld theme.ogg";
-
-    music->mus = Mix_LoadMUS(music->filename);
-    if (NULL == music->mus) {
-        fprintf(stderr, "%s\n", Mix_GetError());
-        return NULL;
-    }
-
     return music;
 }
 
@@ -74,6 +64,13 @@ Music *musicInit()
  */
 int8_t musicPlay(Music *music)
 {
+    music->mus = Mix_LoadMUS(music->filename);
+
+    if (NULL == music->mus) {
+        fprintf(stderr, "%s\n", Mix_GetError());
+        return -1;
+    }
+
     if (-1 == Mix_PlayMusic(music->mus, -1)) {
         fprintf(stderr, "%s\n", Mix_GetError());
         return -1;
@@ -91,6 +88,13 @@ int8_t musicPlay(Music *music)
  */
 int8_t musicFadeIn(Music *music, uint16_t ms)
 {
+    music->mus = Mix_LoadMUS(music->filename);
+
+    if (NULL == music->mus) {
+        fprintf(stderr, "%s\n", Mix_GetError());
+        return -1;
+    }
+
     if (-1 == Mix_FadeInMusic(music->mus, -1, ms))
     {
         fprintf(stderr, "%s\n", Mix_GetError());

@@ -26,7 +26,9 @@ int main()
     Input *input = inputInit();
     if (NULL == input) return EXIT_FAILURE;
 
-    Player *player = playerInit();
+    Player *player   = playerInit();
+    player->filename = "res/sprites/male.png";
+    playerReloadSprite(player);
     if (NULL == player) return EXIT_FAILURE;
 
     Map *map = mapInit();
@@ -34,8 +36,9 @@ int main()
 
     /* Note: The error handling isn't missing.  There is simply no need to quit
      * the program if the music can't be played by some reason. */
-    Mixer *mixer = mixerInit();
-    Music *music = musicInit();
+    Mixer *mixer    = mixerInit();
+    Music *music    = musicInit();
+    music->filename = "res/music/overworld theme.ogg";
     musicFadeIn(music, 5000);
 
     // Main loop.  
