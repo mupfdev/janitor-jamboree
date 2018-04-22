@@ -1,6 +1,7 @@
 /** @file main.c
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ * @todo      Add configuration handler.
  */
 
 #include "main.h"
@@ -31,6 +32,12 @@ int main()
     Map *map = mapInit();
     if (NULL == map) return EXIT_FAILURE;
 
+    /* Note: The error handling isn't missing.  There is simply no need to quit
+     * the program if the music can't be played by some reason. */
+    Mixer *mixer = mixerInit();
+    Music *music = musicInit();
+    musicFadeIn(music, 5000);
+
     // Main loop.  
     uint8_t gameIsRunning = 1;
     while(gameIsRunning)
@@ -43,6 +50,9 @@ int main()
         }
     }
 
+    // Cleanup.
+    musicTerminate(music);
+    mixerTerminate(mixer);
     mapTerminate(map);
     playerTerminate(player);
     inputTerminate(input);

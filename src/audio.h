@@ -5,20 +5,15 @@
 #ifndef AUDIO_h
 #define AUDIO_h
 
-#include <stdint.h>
-#include <string.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
-#include "config.h"
 
 /**
  * @ingroup Audio
  */
 struct MixerType {
     uint16_t audioFormat;
-    int32_t  bitmask;
     uint16_t chunkSize;
-    int32_t  flags;
     uint8_t  numChannels;
     uint16_t samplingFrequency;
 };

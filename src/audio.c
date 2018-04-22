@@ -26,18 +26,9 @@ Mixer *mixerInit()
 
     // Set default values.
     mixer->audioFormat       = MIX_DEFAULT_FORMAT;
-    mixer->flags             = MIX_INIT_OGG;
-    mixer->bitmask           = Mix_Init(mixer->flags);
     mixer->chunkSize         = 4096;
-    mixer->flags             = MIX_INIT_OGG;
     mixer->numChannels       = 2;
     mixer->samplingFrequency = 44100;
-
-    if (mixer->flags != (mixer->bitmask & mixer->flags))
-    {
-        fprintf(stderr, "%s", Mix_GetError());
-        return NULL;
-    }
 
     if (-1 ==
         Mix_OpenAudio(
@@ -45,7 +36,7 @@ Mixer *mixerInit()
             mixer->audioFormat,
             mixer->numChannels,
             mixer->chunkSize))
-    {
+    {   
         fprintf(stderr, "%s\n", Mix_GetError());
         return NULL;
     }
