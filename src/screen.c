@@ -1,7 +1,7 @@
 /** @file screen.c
  * @ingroup   Screen
  * @defgroup  Screen
- * @brief     Screen/Window handler.
+ * @brief     Screen/window handler.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -29,7 +29,7 @@ Screen *screenInit()
     }
 
     uint32_t flags = 0;
-    if (SCREEN_FULLSCREEN) flags = SDL_WINDOW_FULLSCREEN;
+    if (1 == SCREEN_FULLSCREEN) flags = SDL_WINDOW_FULLSCREEN;
 
     screen->window = SDL_CreateWindow(
         "Janitor Jamboree",
@@ -56,5 +56,5 @@ Screen *screenInit()
 void screenTerminate(Screen *screen)
 {
     SDL_DestroyWindow(screen->window);
-    SDL_Quit();
+    free(screen);
 }

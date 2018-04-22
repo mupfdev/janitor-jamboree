@@ -1,7 +1,7 @@
 /** @file audio.c
  * @ingroup   Audio
  * @defgroup  Audio
- * @brief     In-game music and sound effect handler.
+ * @brief     Audio related functions, e.g. music, mixer, sound effects.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -124,5 +124,4 @@ void mixerTerminate(Mixer *mixer)
 void musicTerminate(Music *music)
 {
     free(music);
-    Mix_FreeMusic(music->mus);
 }

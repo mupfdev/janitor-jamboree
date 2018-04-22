@@ -9,6 +9,8 @@
 #ifndef RENDERER_h
 #define RENDERER_h
 
+#include <SDL2/SDL_image.h>
+#include "map.h"
 #include "player.h"
 #include "screen.h"
 
@@ -16,15 +18,17 @@
  * @ingroup Renderer
  */
 struct RendererType {
-    SDL_Texture  *mapTex;
-    SDL_Texture  *playerTex;
+    SDL_Texture  *mapTileset;
+    SDL_Texture  *mapRendered;
+    SDL_Texture  *player;
     SDL_Renderer *renderer;
 };
 
 typedef struct RendererType Renderer;
 
+int8_t   drawGame(Screen *screen, Renderer *renderer, Player *player, Map *map);
 Renderer *rendererInit(Screen *screen);
-int8_t render(Screen *screen, Renderer *renderer, Player *player);
-void rendererTerminate(Renderer *renderer);
+int8_t   renderMap(Renderer *renderer, Map *map);
+void     rendererTerminate(Renderer *renderer);
 
 #endif

@@ -12,13 +12,14 @@
 /** @ingroup Map
  */
 struct MapType {
-    SDL_Surface *tileset;
-    tmx_map     *tmxMap;
+    const char  *filename;
+    tmx_map     *tmx;
 };
 
 typedef struct MapType Map;
 
-Map *mapInit();
-void mapTerminate(Map *map);
+Map    *mapInit();
+int8_t mapLoadTmx(Map *map);
+void   mapTerminate(Map *map);
 
 #endif

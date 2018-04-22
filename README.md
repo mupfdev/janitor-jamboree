@@ -28,6 +28,7 @@ W:      move up
 S:      move down
 A:      move left
 D:      move right
+G:      change gender
 CTRL+q: quit
 ```
 

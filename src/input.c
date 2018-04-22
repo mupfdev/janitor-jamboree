@@ -1,7 +1,7 @@
 /** @file input.c
  * @ingroup   Input
  * @defgroup  Input
- * @brief     Input handler.
+ * @brief     Input related functions, e.g. keyboard input.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -27,16 +27,19 @@ Input *inputInit()
  * @return  
  * @ingroup Input
  */
-uint8_t inputLoop(Input *input)
+int8_t inputLoop(Input *input)
 {   
     SDL_Event event;
     SDL_PollEvent(&event);
+    SDL_Delay(5); // Temporary fix.
 
-    if (event.type == SDL_QUIT) return 0;
+    if (event.type == SDL_WINDOWEVENT)
+        if (event.window.event == SDL_WINDOWEVENT_CLOSE)
+            return -1;
 
     input->keyState = SDL_GetKeyboardState(NULL);
 
-    return 1;
+    return 0;
 }
 
 /**

@@ -1,7 +1,7 @@
 /** @file map.c
  * @ingroup   Map
  * @defgroup  Map
- * @brief     The map handler.
+ * @brief     Functions to load and process tmx map files.
  * @author    Michael Fitzmayer
  * @copyright "THE BEER-WARE LICENCE" (Revision 42)
  */
@@ -18,17 +18,25 @@ Map *mapInit()
     static Map *map;
     map = malloc(sizeof(struct MapType));
 
-    map->tmxMap = tmx_load("res/maps/outskirts.tmx");
+    return map;
+}
 
-    if (NULL == map->tmxMap) {
+/**
+ * @brief   
+ * @param   map
+ * @return  
+ * @ingroup Map
+ */
+int8_t mapLoadTmx(Map *map)
+{
+    map->tmx = tmx_load(map->filename);
+
+    if (NULL == map->tmx) {
         fprintf(stderr, "%s\n", tmx_strerr());
-        return NULL;
+        return -1;
     }
 
-    //tmx_img_load_func = (void* (*)(const char*))IMG_Load;
-    //
-
-    return map;
+    return 0;
 }
 
 /**
@@ -38,5 +46,6 @@ Map *mapInit()
  */
 void mapTerminate(Map *map)
 {
-    tmx_map_free(map->tmxMap);
+    tmx_map_free(map->tmx);
+    free(map);
 }
