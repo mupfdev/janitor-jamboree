@@ -4,7 +4,6 @@ A constantly evolving project I work on to learn the art of game programming and
 ## Dependencies and how to compile
 The program has been successfully compiled with following libraries:
 ```
-libconfig  1.7.2
 libxml2    2.9.8
 sdl2       2.0.8
 sdl2_image 2.0.3

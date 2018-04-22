@@ -2,7 +2,6 @@
 
 PROJECT=janitor-jamboree
 LIBS=\
-	`pkg-config --libs libconfig`\
 	`sdl2-config --libs`\
 	-lSDL2_image\
 	-lSDL2_mixer\
@@ -16,7 +15,6 @@ CFLAGS=\
 	-Wall\
 	-Werror\
 	-Wextra\
-	`pkg-config --cflags libconfig`\
 	`sdl2-config --cflags`\
 	`xml2-config --cflags`
 SRCS=$(wildcard src/*.c) $(wildcard src/tmx/*.c)
