@@ -2,7 +2,6 @@
  * @ingroup Screen
  */
 
-
 #ifndef SCREEN_h
 #define SCREEN_h
 

@@ -55,8 +55,13 @@ Player *playerInit()
     player->fps       = 24;
     player->frame     = 0;
 
-    player->frameUpdateThread = SDL_CreateThread(frameUpdate, "frameUpdate", player);
-    player->threadIsRunning   = 1;
+    player->threadIsRunning = 1;
+    player->frameUpdate = SDL_CreateThread(frameUpdate, "frameUpdate", player);
+    if (NULL == player->frameUpdate)
+    {
+        fprintf(stderr, "%s\n", SDL_GetError());
+        return NULL;
+    } else puts("Test");
 
     return player;
 }
@@ -139,7 +144,7 @@ uint8_t playerLoop(Player *player, const uint8_t *keyState)
 void playerTerminate(Player *player)
 {
     player->threadIsRunning = 0;
-    SDL_WaitThread(player->frameUpdateThread, NULL);
+    SDL_WaitThread(player->frameUpdate, NULL);
     free(player);
     SDL_FreeSurface(player->sprite);
 }

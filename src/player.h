@@ -25,7 +25,7 @@ struct PlayerType {
     uint8_t     inMotion;
     uint8_t     fps;
     uint16_t    frame;
-    SDL_Thread  *frameUpdateThread;
+    SDL_Thread  *frameUpdate;
     uint16_t    posX;
     uint16_t    posY;
     uint8_t     threadIsRunning;
