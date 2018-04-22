@@ -5,7 +5,6 @@
 #define MAIN_h
 
 #include "src/input.h"
-#include "src/config.h"
 #include "src/map.h"
 #include "src/player.h"
 #include "src/renderer.h"

@@ -15,7 +15,6 @@
 #include <unistd.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "config.h"
 
 /** @ingroup Player
  */
@@ -36,7 +35,7 @@ typedef struct PlayerType Player;
 
 Player *playerInit();
 int8_t playerReloadSprite(Player *player);
-uint8_t playerUpdate(Player *player, config_t config, const uint8_t *keyState);
+uint8_t playerLoop(Player *player, const uint8_t *keyState);
 void playerTerminate(Player *player);
 
 #endif

@@ -27,7 +27,7 @@ Input *inputInit()
  * @return  
  * @ingroup Input
  */
-uint8_t inputGetKeys(Input *input)
+uint8_t inputLoop(Input *input)
 {   
     SDL_Event event;
     SDL_PollEvent(&event);

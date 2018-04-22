@@ -12,17 +12,10 @@
 int main()
 {
     // Initialisation.
-    config_t config;
-    config = configInit(config, NULL);
-
-    uint16_t   width      = configGetInt(config,    "video.width");
-    uint16_t   height     = configGetInt(config,    "video.height");
-    uint8_t    fullscreen = configGetBool(config,   "video.fullscreen");
-    const char *title     = configGetString(config, "game.title");
-
     Screen *screen;
-    screen = screenInit(width, height, fullscreen, title);
+    screen = screenInit();
     if (NULL == screen) return EXIT_FAILURE;
+
     atexit(SDL_Quit);
 
     Renderer *renderer;
@@ -42,10 +35,10 @@ int main()
     uint8_t gameIsRunning = 1;
     while(gameIsRunning)
     {
-        gameIsRunning = inputGetKeys(input);
+        gameIsRunning = inputLoop(input);
         if (1 == gameIsRunning)
         {
-            gameIsRunning = playerUpdate(player, config, input->keyState);
+            gameIsRunning = playerLoop(player, input->keyState);
             render(screen, renderer, player);
         }
     }
@@ -55,7 +48,6 @@ int main()
     inputTerminate(input);
     rendererTerminate(renderer);
     screenTerminate(screen);
-    configTerminate(config);
 
     return EXIT_SUCCESS;
 }

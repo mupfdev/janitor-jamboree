@@ -17,7 +17,7 @@ struct InputType {
 typedef struct InputType Input;
 
 Input *inputInit();
-uint8_t inputGetKeys(Input *input);
+uint8_t inputLoop(Input *input);
 void inputTerminate(Input *input);
 
 #endif

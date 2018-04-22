@@ -82,48 +82,41 @@ int8_t playerReloadSprite(Player *player)
 
 /**
  * @brief 
- * @param player
- * @param config
- * @param keyState
+ * @param   player
+ * @param   keyState
  * @return 
  * @ingroup Player
  */
-uint8_t playerUpdate(Player *player, config_t config, const uint8_t *keyState)
+uint8_t playerLoop(Player *player, const uint8_t *keyState)
 {
     // Reset inMotion state (in case no key is pressed).
     player->inMotion = 0;
 
-    uint16_t keyUp    = SDL_GetScancodeFromName(configGetString(config, "controls.up"));
-    uint16_t keyDown  = SDL_GetScancodeFromName(configGetString(config, "controls.down"));
-    uint16_t keyLeft  = SDL_GetScancodeFromName(configGetString(config, "controls.left"));
-    uint16_t keyRight = SDL_GetScancodeFromName(configGetString(config, "controls.right"));
-    uint16_t keyQuit  = SDL_GetScancodeFromName(configGetString(config, "controls.quit"));
-
-    if (keyState[keyQuit])
+    if ((keyState[SDL_SCANCODE_LCTRL]) && (keyState[SDL_SCANCODE_Q]))
         return 0;
 
-    if (keyState[keyUp])
+    if (keyState[SDL_SCANCODE_W])
     {
         player->direction = DIRECTION_UP;
         player->inMotion = 1;
         player->posY--;
     }
 
-    if (keyState[keyDown])
+    if (keyState[SDL_SCANCODE_S])
     {
         player->direction = DIRECTION_DOWN;
         player->inMotion = 1;
         player->posY++;
     }
 
-    if (keyState[keyLeft])
+    if (keyState[SDL_SCANCODE_A])
     {
         player->direction = DIRECTION_LEFT;
         player->inMotion = 1;
         player->posX--;
     }
 
-    if (keyState[keyRight])
+    if (keyState[SDL_SCANCODE_D])
     {
         player->direction = DIRECTION_RIGHT;
         player->inMotion = 1;

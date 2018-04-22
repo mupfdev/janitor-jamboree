@@ -17,11 +17,7 @@
  * @return  
  * @ingroup Screen
  */
-Screen *screenInit(
-    uint16_t width,
-    uint16_t height,
-    uint8_t  fullscreen,
-    const char *title)
+Screen *screenInit()
 {
     static Screen *screen;
     screen = malloc(sizeof(struct ScreenType));
@@ -32,15 +28,15 @@ Screen *screenInit(
         return NULL;
     }
 
-    uint32_t flags;
-    if (fullscreen) flags = SDL_WINDOW_FULLSCREEN;
+    uint32_t flags = 0;
+    if (SCREEN_FULLSCREEN) flags = SDL_WINDOW_FULLSCREEN;
 
     screen->window = SDL_CreateWindow(
-        title,
+        "Janitor Jamboree",
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        width,
-        height,
+        SCREEN_WIDTH,
+        SCREEN_HEIGHT,
         flags);
 
     if (NULL == screen->window)
