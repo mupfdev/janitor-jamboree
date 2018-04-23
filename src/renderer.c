@@ -158,6 +158,7 @@ Renderer *rendererInit(Screen *screen)
     if (NULL == renderer->renderer)
     {
         fprintf(stderr, "Couldn't create renderer: %s\n", SDL_GetError());
+        free(renderer);
         return NULL;
     }
 

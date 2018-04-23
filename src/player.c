@@ -56,6 +56,7 @@ Player *playerInit()
     if (NULL == player->frameUpdate)
     {
         fprintf(stderr, "%s\n", SDL_GetError());
+        free(player);
         return NULL;
     }
 

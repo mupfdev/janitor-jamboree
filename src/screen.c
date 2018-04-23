@@ -25,6 +25,7 @@ Screen *screenInit()
     if (-1 == SDL_Init(SDL_INIT_VIDEO))
     {
         fprintf(stderr, "Couldn't initialise SDL: %s\n", SDL_GetError());
+        free(screen);
         return NULL;
     }
 
@@ -42,6 +43,7 @@ Screen *screenInit()
     if (NULL == screen->window)
     {
         fprintf(stderr, "Couldn't set video mode: %s\n", SDL_GetError());
+        free(screen);
         return NULL;
     }
 

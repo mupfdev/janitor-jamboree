@@ -21,6 +21,7 @@ Mixer *mixerInit()
     if (-1 == SDL_Init(SDL_INIT_AUDIO))
     {
         fprintf(stderr, "Couldn't initialise SDL: %s\n", SDL_GetError());
+        free(mixer);
         return NULL;
     }
 
@@ -37,6 +38,7 @@ Mixer *mixerInit()
             mixer->chunkSize))
     {   
         fprintf(stderr, "%s\n", Mix_GetError());
+        free(mixer);
         return NULL;
     }
 
