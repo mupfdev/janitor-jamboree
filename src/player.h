@@ -26,8 +26,10 @@ struct PlayerType {
     uint16_t   frame;
     SDL_Thread *frameUpdate;
     uint8_t    threadIsRunning;
-    int32_t    mapPosX;
-    int32_t    mapPosY;
+    int16_t    mapPosX;
+    int16_t    mapPosY;
+    int16_t    renderPosX;
+    int16_t    renderPosY;
 };
 
 typedef struct PlayerType Player;

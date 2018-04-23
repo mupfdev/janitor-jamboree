@@ -1,9 +1,5 @@
 /** @file renderer.h
- * @ingroup   Renderer
- * @defgroup  Renderer
- * @brief     The graphics renderer.
- * @author    Michael Fitzmayer
- * @copyright "THE BEER-WARE LICENCE" (Revision 42)
+ * @ingroup Renderer
  */
 
 #ifndef RENDERER_h
@@ -26,9 +22,8 @@ struct RendererType {
 
 typedef struct RendererType Renderer;
 
-int8_t   drawGame(Screen *screen, Renderer *renderer, Player *player, Map *map);
 Renderer *rendererInit(Screen *screen);
-int8_t   renderMap(Renderer *renderer, Map *map);
+int8_t   renderScene(Screen *screen, Renderer *renderer, Player *player, Map *map);
 void     rendererTerminate(Renderer *renderer);
 
 #endif

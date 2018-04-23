@@ -29,7 +29,7 @@ int main()
     if (NULL == map) return EXIT_FAILURE;
     map->filename = "res/maps/outskirts.tmx";
     if (-1 == mapLoadTmx(map)) return EXIT_FAILURE;
-    if (-1 == renderMap(renderer, map)) return EXIT_FAILURE;
+    //if (-1 == renderMap(renderer, map)) return EXIT_FAILURE;
 
     Player *player = playerInit();
     if (NULL == player) return EXIT_FAILURE;
@@ -44,9 +44,9 @@ int main()
 
     while(1)
     {
-        if (-1 == inputLoop(input))                        break;
-        if (-1 == playerLoop(player, input->keyState))     break;
-        if (-1 == drawGame(screen, renderer, player, map)) break;
+        if (-1 == inputLoop(input))                           break;
+        if (-1 == playerLoop(player, input->keyState))        break;
+        if (-1 == renderScene(screen, renderer, player, map)) break;
     }
 
     musicTerminate(music);

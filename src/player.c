@@ -50,6 +50,8 @@ Player *playerInit()
     player->frame      = 0;
     player->mapPosX    = 0;
     player->mapPosY    = 0;
+    player->renderPosX = 0;
+    player->renderPosY = 0;
 
     player->threadIsRunning = 1;
     player->frameUpdate = SDL_CreateThread(frameUpdate, "frameUpdate", player);
@@ -91,28 +93,28 @@ int8_t playerLoop(Player *player, const uint8_t *keyState)
     {
         player->direction = DIRECTION_UP;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosY++;
+        player->mapPosY += 5;
     }
 
     if (keyState[SDL_SCANCODE_S])
     {
         player->direction = DIRECTION_DOWN;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosY--;
+        player->mapPosY -= 5;
     }
 
     if (keyState[SDL_SCANCODE_A])
     {
         player->direction = DIRECTION_LEFT;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosX++;
+        player->mapPosX += 5;
     }
 
     if (keyState[SDL_SCANCODE_D])
     {
         player->direction = DIRECTION_RIGHT;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosX--;
+        player->mapPosX -= 5;
     }
 
     return 0;

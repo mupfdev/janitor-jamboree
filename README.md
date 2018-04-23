@@ -2,7 +2,7 @@
 A constantly evolving project I work on to learn the art of game programming and design patterns.
 
 ## Dependencies and how to compile
-The program has been successfully compiled with following libraries:
+The program has been successfully compiled with the following libraries:
 ```
 libxml2    2.9.8
 sdl2       2.0.8

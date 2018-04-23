@@ -34,7 +34,6 @@ int8_t inputLoop(Input *input)
         return -1;    
 
     input->keyState = SDL_GetKeyboardState(NULL);
-    SDL_Delay(5);
 
     return 0;
 }
