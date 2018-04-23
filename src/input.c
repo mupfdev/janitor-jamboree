@@ -28,16 +28,13 @@ Input *inputInit()
  * @ingroup Input
  */
 int8_t inputLoop(Input *input)
-{   
-    SDL_Event event;
-    SDL_PollEvent(&event);
-    SDL_Delay(5); // Temporary fix.
-
-    if (event.type == SDL_WINDOWEVENT)
-        if (event.window.event == SDL_WINDOWEVENT_CLOSE)
-            return -1;
+{
+    SDL_PumpEvents();
+    if (SDL_PeepEvents(0, 0, SDL_PEEKEVENT, SDL_QUIT, SDL_QUIT) > 0)
+        return -1;    
 
     input->keyState = SDL_GetKeyboardState(NULL);
+    SDL_Delay(5);
 
     return 0;
 }
