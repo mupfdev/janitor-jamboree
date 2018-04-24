@@ -10,11 +10,9 @@
 /**
  * @ingroup Input
  */
-struct InputType {
+typedef struct input_t {
     const uint8_t *keyState;
-};
-
-typedef struct InputType Input;
+} Input;
 
 Input  *inputInit();
 int8_t inputLoop(Input *input);

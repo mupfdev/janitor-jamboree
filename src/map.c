@@ -16,7 +16,10 @@
 Map *mapInit()
 {
     static Map *map;
-    map = malloc(sizeof(struct MapType));
+    map = malloc(sizeof(struct map_t));
+
+    map->gidCenter = 0;
+    map->tmx = NULL;
 
     return map;
 }

@@ -24,9 +24,10 @@ static uint32_t gidClearFlags(unsigned int gid)
  * @param   renderer
  * @param   map
  * @param   layers
+ * @param   name
  * @ingroup Map
  */
-static void renderLayers(Renderer *renderer, tmx_map *map, tmx_layer *layers) {
+static void renderLayers(Renderer *renderer, tmx_map *map, tmx_layer *layers, const char *name) {
     SDL_Rect    src;
     SDL_Rect    dst;
     uint32_t    gid;
@@ -36,13 +37,13 @@ static void renderLayers(Renderer *renderer, tmx_map *map, tmx_layer *layers) {
 
     while (layers)
     {
-        if (layers->visible)
+        if ((layers->visible) && (NULL != strstr(layers->name, name)))
         {
             for (ih = 0; ih < map->height; ih++)
                 for (iw = 0; iw < map->width; iw++)
                 {
                     gid = gidClearFlags(layers->content.gids[(ih * map->width) + iw]);
-                    if (map->tiles[gid] != NULL)
+                    if (NULL != map->tiles[gid])
                     {
                         ts    = map->tiles[gid]->tileset;
                         src.x = map->tiles[gid]->ul_x;
@@ -68,67 +69,55 @@ static void renderLayers(Renderer *renderer, tmx_map *map, tmx_layer *layers) {
  * @brief    
  * @param   renderer
  * @param   map
+ * @param   name
  * @param   posX
  * @param   posY
  * @ingroup Renderer
  * @return  
  */
-static int8_t renderMap(Renderer *renderer, Map *map, int16_t posX, int16_t posY)
+static SDL_Texture *renderMap(Renderer *renderer, Map *map, const char *name)
 {
+    static SDL_Texture *mapRendered;
+    mapRendered = NULL;
+
     if (NULL == renderer->mapTileset)
         renderer->mapTileset = IMG_LoadTexture(renderer->renderer, "res/tilesets/terrain_atlas.png");
 
     if (NULL == renderer->mapTileset)
     {
         fprintf(stderr, "%s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
-    SDL_Rect mapDst;
-    mapDst.w = map->tmx->width  * map->tmx->tile_width;
-    mapDst.h = map->tmx->height * map->tmx->tile_height;
-    mapDst.x = posX;
-    mapDst.y = posY;
-
-    if (NULL == renderer->mapRendered)
-        renderer->mapRendered = SDL_CreateTexture(
+    if (NULL == mapRendered)
+        mapRendered = SDL_CreateTexture(
             renderer->renderer,
             SDL_PIXELFORMAT_RGBA8888,
             SDL_TEXTUREACCESS_TARGET,
-            mapDst.w,
-            mapDst.h);
+            map->tmx->width  * map->tmx->tile_width,
+            map->tmx->height * map->tmx->tile_height);
 
-    if (NULL == renderer->mapRendered)
+    if (NULL == mapRendered)
     {
         fprintf(stderr, "%s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
-    if (-1 == SDL_SetRenderTarget(renderer->renderer, renderer->mapRendered))
+    if (-1 == SDL_SetRenderTarget(renderer->renderer, mapRendered))
     {
         fprintf(stderr, "%s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
-    SDL_SetRenderDrawColor(renderer->renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer->renderer);
-
-    renderLayers(renderer, map->tmx, map->tmx->ly_head);
+    renderLayers(renderer, map->tmx, map->tmx->ly_head, name);
 
     if (-1 == SDL_SetRenderTarget(renderer->renderer, NULL))
     {
-        puts("3");
         fprintf(stderr, "%s\n", SDL_GetError());
-        return -1;
+        return NULL;
     }
 
-    if (-1 == SDL_RenderCopy(renderer->renderer, renderer->mapRendered, NULL, &mapDst))
-    {
-        fprintf(stderr, "%s\n", SDL_GetError());
-        return -1;
-    }
-
-    return 0;
+    return mapRendered;
 }
 
 /**
@@ -176,11 +165,12 @@ static int8_t renderPlayer(Renderer *renderer, Player *player, int16_t posX, int
 Renderer *rendererInit(Screen *screen)
 {
     static Renderer *renderer;
-    renderer = malloc(sizeof(struct RendererType));
+    renderer = malloc(sizeof(struct renderer_t));
 
-    renderer->mapRendered = NULL;
-    renderer->mapTileset  = NULL;
-    renderer->player      = NULL;
+    renderer->mapRenderedOverlay = NULL;
+    renderer->mapRenderedTerrain = NULL;
+    renderer->mapTileset         = NULL;
+    renderer->player             = NULL;
 
     renderer->renderer = SDL_CreateRenderer(
         screen->window,
@@ -208,23 +198,79 @@ Renderer *rendererInit(Screen *screen)
  */
 int8_t renderScene(Screen *screen, Renderer *renderer, Player *player, Map *map)
 {
+    SDL_Rect sceneDst;
+    sceneDst.w = map->tmx->width  * map->tmx->tile_width;
+    sceneDst.h = map->tmx->height * map->tmx->tile_height;
+
     int32_t screenWidth;
     int32_t screenHeight;
 
     SDL_GetWindowSize(screen->window, &screenWidth, &screenHeight);
 
-    player->renderPosX = (screenWidth / 2)  - 32;
-    player->renderPosY = (screenHeight / 2) - 32;
-
     player->mapPosX = (screenWidth  / 2) - (screenWidth  / 2) + player->mapPosX;
     player->mapPosY = (screenHeight / 2) - (screenHeight / 2) + player->mapPosY;
 
-    if (-1 == renderMap(renderer, map, player->mapPosX, player->mapPosY))
+    sceneDst.x = player->mapPosX;
+    sceneDst.y = player->mapPosY;
+
+    if (-1 == SDL_SetRenderDrawBlendMode(renderer->renderer, SDL_BLENDMODE_BLEND))
+    {
+        fprintf(stderr, "%s\n", SDL_GetError());
+        return -1;
+    }
+
+    // Map boundaries.
+    if (player->mapPosX >= (screenWidth / 2) - 16)
+        player->mapPosX  = (screenWidth / 2) - 16;
+
+    if (player->mapPosX <= (sceneDst.w - (sceneDst.w * 2)) + (screenWidth / 2) + 16)
+        player->mapPosX  = (sceneDst.w - (sceneDst.w * 2)) + (screenWidth / 2) + 16;
+
+    if (player->mapPosY >= (screenHeight / 2) - 16)
+        player->mapPosY  = (screenHeight / 2) - 16;
+
+    if (player->mapPosY <= (sceneDst.h - (sceneDst.w * 2)) + (screenHeight / 2) + 32)
+        player->mapPosY  = (sceneDst.h - (sceneDst.w * 2)) + (screenHeight / 2) + 32;
+
+    // Debug.
+    player->posX = player->mapPosX - (screenWidth / 2);
+    player->posX = abs(player->posX) / 32;
+
+    player->posY = player->mapPosY - (screenHeight / 2);
+    player->posY = abs(player->posY) / 32;
+
+    player->test1 = (map->tmx->width * player->posY) + player->posX;
+    if (player->test1 != player->test2)
+        printf("%d\n", player->test1);
+    player->test2 = player->test1;
+
+    // Terrain.
+    if (NULL == renderer->mapRenderedTerrain)
+        renderer->mapRenderedTerrain = renderMap(renderer, map, "Terrain");
+    SDL_SetTextureBlendMode(renderer->mapRenderedTerrain, SDL_BLENDMODE_BLEND);
+
+    if (-1 == SDL_RenderCopy(renderer->renderer, renderer->mapRenderedTerrain, NULL, &sceneDst))
+    {
+        fprintf(stderr, "%s\n", SDL_GetError());
+        return -1;
+    }
+
+    // Player;
+    if (-1 == renderPlayer(renderer, player, (screenWidth  / 2) - 32, (screenHeight / 2) - 32))
         return -1;
 
-    if (-1 == renderPlayer(renderer, player, player->renderPosX, player->renderPosY))
-        return -1;
+    // Overlay.
+    if (NULL == renderer->mapRenderedOverlay)
+        renderer->mapRenderedOverlay = renderMap(renderer, map, "Overlay");
+    SDL_SetTextureBlendMode(renderer->mapRenderedOverlay, SDL_BLENDMODE_BLEND);
 
+    if (-1 == SDL_RenderCopy(renderer->renderer, renderer->mapRenderedOverlay, NULL, &sceneDst))
+    {
+        fprintf(stderr, "%s\n", SDL_GetError());
+        return -1;
+    }
+
+    // Render scene.
     SDL_RenderPresent(renderer->renderer);
     SDL_RenderClear(renderer->renderer);
 

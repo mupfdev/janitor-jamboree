@@ -18,7 +18,7 @@
 
 /** @ingroup Player
  */
-struct PlayerType {
+typedef struct player_t {
     const char *filename;
     uint8_t    direction;
     uint8_t    flags;
@@ -28,11 +28,12 @@ struct PlayerType {
     uint8_t    threadIsRunning;
     int16_t    mapPosX;
     int16_t    mapPosY;
-    int16_t    renderPosX;
-    int16_t    renderPosY;
-};
-
-typedef struct PlayerType Player;
+    // Logical player position:
+    int16_t    posX;
+    int16_t    posY;
+    uint16_t   test1;
+    uint16_t   test2;
+} Player;
 
 Player *playerInit();
 void   playerLoadSprite(Player *player, const char *filename);

@@ -29,7 +29,6 @@ int main()
     if (NULL == map) return EXIT_FAILURE;
     map->filename = "res/maps/outskirts.tmx";
     if (-1 == mapLoadTmx(map)) return EXIT_FAILURE;
-    //if (-1 == renderMap(renderer, map)) return EXIT_FAILURE;
 
     Player *player = playerInit();
     if (NULL == player) return EXIT_FAILURE;

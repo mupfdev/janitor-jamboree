@@ -13,14 +13,13 @@
 /**
  * @ingroup Renderer
  */
-struct RendererType {
+typedef struct renderer_t {
     SDL_Texture  *mapTileset;
-    SDL_Texture  *mapRendered;
+    SDL_Texture  *mapRenderedOverlay;
+    SDL_Texture  *mapRenderedTerrain;
     SDL_Texture  *player;
     SDL_Renderer *renderer;
-};
-
-typedef struct RendererType Renderer;
+} Renderer;
 
 Renderer *rendererInit(Screen *screen);
 int8_t   renderScene(Screen *screen, Renderer *renderer, Player *player, Map *map);

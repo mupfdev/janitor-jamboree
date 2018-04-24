@@ -20,7 +20,7 @@
 Screen *screenInit()
 {
     static Screen *screen;
-    screen = malloc(sizeof(struct ScreenType));
+    screen = malloc(sizeof(struct screen_t));
 
     if (-1 == SDL_Init(SDL_INIT_VIDEO))
     {

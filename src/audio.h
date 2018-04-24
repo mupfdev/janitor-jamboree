@@ -11,20 +11,17 @@
 /**
  * @ingroup Audio
  */
-struct MixerType {
+typedef struct mixer_t {
     uint16_t audioFormat;
     uint16_t chunkSize;
     uint8_t  numChannels;
     uint16_t samplingFrequency;
-};
+} Mixer;
 
-struct MusicType {
+typedef struct music_t {
     char      *filename;
     Mix_Music *mus;
-};
-
-typedef struct MixerType Mixer;
-typedef struct MusicType Music;
+} Music;
 
 Mixer *mixerInit();
 Music *musicInit();

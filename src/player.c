@@ -42,16 +42,19 @@ static int32_t frameUpdate(void *plr)
 Player *playerInit()
 {
     static Player *player;
-    player = malloc(sizeof(struct PlayerType));
+    player = malloc(sizeof(struct player_t));
 
-    player->direction  = DIRECTION_DOWN;
-    player->flags      = 0;
-    player->fps        = 24;
-    player->frame      = 0;
-    player->mapPosX    = 0;
-    player->mapPosY    = 0;
-    player->renderPosX = 0;
-    player->renderPosY = 0;
+    player->direction = DIRECTION_DOWN;
+    player->flags     = 0;
+    player->fps       = 24;
+    player->frame     = 0;
+    player->mapPosX   = 0;
+    player->mapPosY   = 0;
+    player->posX      = 0;
+    player->posY      = 0;
+
+    player->test1 = 0;
+    player->test2 = 0;
 
     player->threadIsRunning = 1;
     player->frameUpdate = SDL_CreateThread(frameUpdate, "frameUpdate", player);
@@ -93,28 +96,28 @@ int8_t playerLoop(Player *player, const uint8_t *keyState)
     {
         player->direction = DIRECTION_UP;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosY += 5;
+        player->mapPosY++;
     }
 
     if (keyState[SDL_SCANCODE_S])
     {
         player->direction = DIRECTION_DOWN;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosY -= 5;
+        player->mapPosY--;
     }
 
     if (keyState[SDL_SCANCODE_A])
     {
         player->direction = DIRECTION_LEFT;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosX += 5;
+        player->mapPosX++;
     }
 
     if (keyState[SDL_SCANCODE_D])
     {
         player->direction = DIRECTION_RIGHT;
         player->flags |= 1 << IN_MOTION;
-        player->mapPosX -= 5;
+        player->mapPosX--;
     }
 
     return 0;

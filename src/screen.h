@@ -10,11 +10,9 @@
 
 /** @ingroup Screen
  */
-struct ScreenType {
+typedef struct screen_t {
     SDL_Window *window;
-};
-
-typedef struct ScreenType Screen;
+} Screen;
 
 Screen *screenInit();
 void   screenTerminate(Screen *screen);

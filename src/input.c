@@ -16,7 +16,7 @@
 Input *inputInit()
 {
     static Input *input;
-    input = malloc(sizeof(struct InputType));
+    input = malloc(sizeof(struct input_t));
 
     return input;
 }
@@ -33,6 +33,7 @@ int8_t inputLoop(Input *input)
     if (SDL_PeepEvents(0, 0, SDL_PEEKEVENT, SDL_QUIT, SDL_QUIT) > 0)
         return -1;    
 
+    SDL_Delay(8);
     input->keyState = SDL_GetKeyboardState(NULL);
 
     return 0;

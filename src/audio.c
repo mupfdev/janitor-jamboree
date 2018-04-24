@@ -16,7 +16,7 @@
 Mixer *mixerInit()
 {
     static Mixer *mixer;
-    mixer = malloc(sizeof(struct MixerType));
+    mixer = malloc(sizeof(struct mixer_t));
 
     if (-1 == SDL_Init(SDL_INIT_AUDIO))
     {
@@ -53,7 +53,7 @@ Mixer *mixerInit()
 Music *musicInit()
 {
     static Music *music;
-    music = malloc(sizeof(struct MusicType));
+    music = malloc(sizeof(struct music_t));
 
     return music;
 }

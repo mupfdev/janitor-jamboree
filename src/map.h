@@ -11,12 +11,11 @@
 
 /** @ingroup Map
  */
-struct MapType {
+typedef struct map_t {
     const char  *filename;
+    uint16_t    gidCenter;
     tmx_map     *tmx;
-};
-
-typedef struct MapType Map;
+} Map;
 
 Map    *mapInit();
 int8_t mapLoadTmx(Map *map);

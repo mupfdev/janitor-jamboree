@@ -10,7 +10,7 @@
 #ifndef CONFIG_h
 #define CONFIG_h
 
-#define AUDIO_ENABLED       1
+#define AUDIO_ENABLED       0
 
 #define SCREEN_FULLSCREEN   0
 #define SCREEN_WIDTH      800
