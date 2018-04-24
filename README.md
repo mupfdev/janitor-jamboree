@@ -1,6 +1,9 @@
 # Janitor Jamboree
 A constantly evolving project I work on to learn the art of game programming and design patterns.
 
+## Note
+This project is no longer maintained.  I wrote it for learning purposes and have no further interest in it.
+
 ## Dependencies and how to compile
 The program has been successfully compiled with the following libraries:
 ```
