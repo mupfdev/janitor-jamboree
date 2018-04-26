@@ -1,8 +1,11 @@
-# Janitor Jamboree
-A constantly evolving project I work on to learn the art of game programming and design patterns.
+## THIS REPOSITORY HAS DISCONTINUED
+This project is no longer maintained.  I wrote it for learning purposes and have
+no further interest in it.
 
-## Note
-This project is no longer maintained.  I wrote it for learning purposes and have no further interest in it.
+## Janitor Jamboree
+A now obsolete project I used to work on to learn the art of game programming.  
+Follow-on project:
+[Rainbow Joe](https://github.com/mupfelofen-de/rainbow-joe).
 
 ## Dependencies and how to compile
 The program has been successfully compiled with the following libraries:
@@ -36,13 +39,19 @@ CTRL+q: quit
 ```
 
 ## Title
-The quite odd game title was generated using [The Video Game Name Generator](https://www.videogamena.me/).
+The quite odd game title was generated using
+[The Video Game Name Generator](https://www.videogamena.me/).
 
 ## License
-This project is licensed under the "THE BEER-WARE LICENCE".  See the file [LICENCE.md](LICENCE.md) for details.
+This project is licensed under the "THE BEER-WARE LICENCE".  See the file
+[LICENCE.md](LICENCE.md) for details.
 
-All the used artwork is taken from the [Liberated Pixel Cup](http://lpc.opengameart.org/) and is dual licensed under [CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) and [GPLv3](http://www.gnu.org/licenses/gpl-3.0.html).
+All the used artwork is taken from the
+[Liberated Pixel Cup](http://lpc.opengameart.org/) and is dual licensed under
+[CC BY-SA 3.0](http://creativecommons.org/licenses/by-sa/3.0/) and
+[GPLv3](http://www.gnu.org/licenses/gpl-3.0.html).
 
-Music: [Overworld Theme](https://opengameart.org/content/overworld-theme) by [remaxim](https://opengameart.org/users/remaxim).
+Music: [Overworld Theme](https://opengameart.org/content/overworld-theme) by
+[remaxim](https://opengameart.org/users/remaxim).
 
 [TMX C Loader](https://github.com/baylej/tmx/) by Bayle Jonathan.
