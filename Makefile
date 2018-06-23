@@ -27,5 +27,5 @@ all: $(OBJS)
 	gcc -c $(CFLAGS) $(LIBS) -o $@ $<
 
 clean:
-	rm $(PROJECT)
-	rm $(OBJS)
+	rm -f $(PROJECT)
+	rm -f $(OBJS)
